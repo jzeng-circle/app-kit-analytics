@@ -5,7 +5,7 @@
 | Dataset | Date Range | Note |
 |---|---|---|
 | Swap — Testnet | 2026-03-13 → 2026-05-05 | Sample; arc_testnet has no public RPC, date range aligned with mainnet export |
-| Swap — Mainnet | 2026-03-13 → 2026-05-05 | Sample; resolved from on-chain block timestamps (ETH/BASE/ARB/SOL) |
+| Swap — Mainnet | 2026-03-13 → 2026-05-05 | Full dataset; resolved from on-chain block timestamps (ETH/BASE/ARB/SOL) |
 | Bridge — Testnet | 2025-10-30 → 2026-05-03 | Sample; date range aligned with mainnet export |
 | Bridge — Mainnet | 2025-10-30 → 2026-05-03 | Sample; from block_timestamp column in source data |
 
@@ -61,7 +61,7 @@
 
 ---
 
-### Mainnet (base, arbitrum, ethereum, solana) — 56 transactions (sample) · 2026-03-13 to 2026-05-05
+### Mainnet (base, arbitrum, ethereum, solana) — 56 transactions · 2026-03-13 to 2026-05-05
 
 56 transactions across 22 wallets, total volume $65.80. 2 transactions carry a fee of $0.00000001 each — negligibly small, effectively zero. No developer has configured meaningful custom fees on swap for mainnet.
 
