@@ -2,19 +2,14 @@
 **Generated**: 2026-05-06
 **Sources**: `data/swap_mainnet_txns.csv` · `data/swap_testnet_txns.csv` · `data/bridge_mainnet_txns.csv` (wallet-enriched) · `data/bridge_testnet_txns.csv`
 
-| Dataset | Date Range | Note |
-|---|---|---|
-| Swap — Testnet | 2026-03-13 → 2026-05-05 | Sample; arc_testnet has no public RPC, date range aligned with mainnet export |
-| Swap — Mainnet | 2026-03-13 → 2026-05-05 | Full dataset; resolved from on-chain block timestamps (ETH/BASE/ARB/SOL) |
-| Bridge — Testnet | 2025-10-30 → 2026-05-03 | Sample; date range aligned with mainnet export |
-| Bridge — Mainnet | 2025-10-30 → 2026-05-03 | Sample; from block_timestamp column in source data |
-
 ---
 
 ## Executive Summary
 
 | | Swap — Testnet | Swap — Mainnet | Bridge — Testnet | Bridge — Mainnet |
 |---|---|---|---|---|
+| Data | Sample | Full dataset | Sample | Sample |
+| Date range | 2026-03-13 → 2026-05-05 | 2026-03-13 → 2026-05-05 | 2025-10-30 → 2026-05-03 | 2025-10-30 → 2026-05-03 |
 | Transactions | 9,976 | 56 | 1,000 | 10,000 |
 | Unique wallets | 1,820 | 22 | 207 | 466 (88% resolved) |
 | Fee adoption | 60.0% | ~0% | 8.8% | 10.8% |
@@ -37,7 +32,7 @@
 
 *Transactions are clustered by effective fee rate in basis points (bps); this produces the clearest separation in the swap data, though it is not conclusive about how developers configure fees.*
 
-### Testnet (arc_testnet) — 9,976 transactions (sample) · 2026-03-13 to 2026-05-05
+### Testnet (arc_testnet) — 9,976 transactions (sample)
 
 *1,820 unique wallets. 437 wallets appear in more than one cluster, meaning the same developer used different fee rates across transactions.*
 
@@ -61,7 +56,7 @@
 
 ---
 
-### Mainnet (base, arbitrum, ethereum, solana) — 56 transactions · 2026-03-13 to 2026-05-05
+### Mainnet (base, arbitrum, ethereum, solana) — 56 transactions
 
 56 transactions across 22 wallets, total volume $65.80. 2 transactions carry a fee of $0.00000001 each — negligibly small, effectively zero. No developer has configured meaningful custom fees on swap for mainnet.
 
@@ -71,7 +66,7 @@
 
 *Transactions are clustered by absolute fee amount per transaction; within each fee tier the fee value has low variance while effective bps varies widely, making flat fee the cleaner lens for bridge data, though this is not conclusive.*
 
-### Testnet (arbitrum_sepolia, polygon_amoy) — 1,000 transactions (sample) · 2025-10-30 to 2026-05-03
+### Testnet (arbitrum_sepolia, polygon_amoy) — 1,000 transactions (sample)
 
 *207 unique wallets. Wallet addresses are included directly in the testnet dataset. Wallets can appear in multiple fee tiers.*
 
@@ -102,7 +97,7 @@
 
 ---
 
-### Mainnet (11 chains) — 10,000 transactions (sample) · 2025-10-30 to 2026-05-03
+### Mainnet (11 chains) — 10,000 transactions (sample)
 
 *Wallet addresses fetched on-chain. Coverage: 950/1,080 fee-bearing txns (88%). Unresolved: SOL 105, CODEX 13, PLUME 8, SEI 4 — no reliable public RPC available for these chains. Wallet counts reflect resolved txns only.*
 
