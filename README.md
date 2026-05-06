@@ -10,7 +10,8 @@ Analysis of the custom fee feature across Circle's Swap Kit and Bridge Kit produ
 
 | File | Description |
 |---|---|
-| `data/swap_txns.csv` | Swap Kit transaction-level data — 10,000 txns (9,970 testnet, 30 mainnet) |
+| `data/swap_testnet_txns.csv` | Swap Kit testnet — 10,000 txns (arc_testnet + 24 mainnet chain rows), 1,820 wallets |
+| `data/swap_mainnet_txns.csv` | Swap Kit mainnet — 56 txns across base, arbitrum, ethereum, solana, 22 wallets |
 | `data/bridge_mainnet_txns.csv` | Bridge Kit mainnet — 10,000 txns across 11 chains, enriched with resolved wallet addresses |
 | `data/bridge_testnet_txns.csv` | Bridge Kit testnet — 1,000 txns (arbitrum_sepolia, polygon_amoy), includes dev_address |
 
