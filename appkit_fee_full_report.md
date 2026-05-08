@@ -30,8 +30,6 @@
 
 **Wallets appear in multiple fee-rate clusters.** 437 of 1,820 testnet wallets show up in more than one cluster. This is consistent with the same developer using different rates across transactions, but could also reflect app-level fee logic, A/B tests, or other factors not visible in the data.
 
-**Circle:developer share on testnet is 9.1:90.9** ($147.71 of $1,624.84 total fees in the observed data).
-
 **Mainnet shows minimal fee activity.** 56 transactions across 22 wallets, $66 total volume, ~$0 in fees — only 2 of 56 transactions carry any fee at all, both at $0.00000001. Whatever has been configured, no meaningful fee revenue is being collected on swap mainnet in this sample.
 
 ### Bridge Kit — Key Insights
@@ -43,8 +41,6 @@
 **ETH is the dominant fee-generating destination.** 64.1% of mainnet Circle fees route to ETH, followed by HYPEREVM (16.1%), BASE (6.1%), and ARB (5.6%). The top four destinations together account for 91.9% of Circle fees.
 
 **Testnet has wide volume reach but minimal fee activity.** $51.8M in testnet volume but only **1.7% txn-level fee adoption** and $0.61 in Circle fees. Most testnet bridges are fee-free; whether this reflects integration testing, unconfigured fees, or other usage patterns cannot be determined from the data alone. Mainnet, by contrast, has 18.8% txn-level fee adoption.
-
-**Circle's share of fee revenue is consistently 10%** in the observed data — Circle $91.54 / total $915.39 on mainnet, Circle $0.609 / total $6.091 on testnet. Whether this 10:90 split is a fixed protocol parameter or a configuration default is not determinable from this dataset alone.
 
 ---
 
@@ -86,7 +82,7 @@
 
 *Transactions are clustered by absolute fee amount per transaction; within each cluster the fee value has low variance while effective bps varies widely, which is consistent with flat-amount fee structures. This is an observation about the data, not direct evidence of how fees are configured.*
 
-**Observed fee structure**: Bridge fee values in the data cluster around round dollar figures. In the >$1 mainnet tier, the most common observed values are $1.00, $1.25, $5.00, $50.00, and $100.00, appearing on widely varying notional sizes. Circle's share of total fees is exactly **10:90** in every observed fee-bearing transaction (mainnet $91.54 / $915.39 = 10.0%; testnet $0.609 / $6.091 = 10.0%). The underlying developer configuration is not directly visible in this dataset, so these are deductions from observed behavior rather than concrete evidence of how fees are set.
+**Observed fee structure**: Bridge fee values in the data cluster around round dollar figures. In the >$1 mainnet tier, the most common observed values are $1.00, $1.25, $5.00, $50.00, and $100.00, appearing on widely varying notional sizes. The underlying developer configuration is not directly visible in this dataset, so these are deductions from observed behavior rather than concrete evidence of how fees are set.
 
 ### Testnet (arc_testnet, arbitrum_sepolia, polygon_amoy) — 10,000 transactions (sample)
 
