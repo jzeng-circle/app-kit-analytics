@@ -30,7 +30,7 @@
 
 **Wallets appear in multiple fee-rate clusters.** 437 of 1,820 testnet wallets show up in more than one cluster. This is consistent with the same developer using different rates across transactions, but could also reflect app-level fee logic, A/B tests, or other factors not visible in the data.
 
-**Blended effective Circle rate on testnet is ~2.45 bps** ($147.71 Circle / $603K volume). The Circle:developer share in the observed data is **9.1:90.9** ($147.71 of $1,624.84 total fees).
+**Circle:developer share on testnet is 9.1:90.9** ($147.71 of $1,624.84 total fees in the observed data).
 
 **Mainnet shows minimal fee activity.** 56 transactions across 22 wallets, $66 total volume, ~$0 in fees — only 2 of 56 transactions carry any fee at all, both at $0.00000001. Whatever has been configured, no meaningful fee revenue is being collected on swap mainnet in this sample.
 
@@ -43,8 +43,6 @@
 **ETH is the dominant fee-generating destination.** 64.1% of mainnet Circle fees route to ETH, followed by HYPEREVM (16.1%), BASE (6.1%), and ARB (5.6%). The top four destinations together account for 91.9% of Circle fees.
 
 **Testnet has wide volume reach but minimal fee activity.** $51.8M in testnet volume but only **1.7% txn-level fee adoption** and $0.61 in Circle fees. Most testnet bridges are fee-free; whether this reflects integration testing, unconfigured fees, or other usage patterns cannot be determined from the data alone. Mainnet, by contrast, has 18.8% txn-level fee adoption.
-
-**Effective rate falls as notional grows.** Blended effective Circle rate is **0.034 bps** on $26.9M total volume, or **0.051 bps** on fee-bearing volume only. This is what would be expected under flat-fee behavior, and is consistent with — but not direct evidence of — flat-amount configuration.
 
 **Circle's share of fee revenue is consistently 10%** in the observed data — Circle $91.54 / total $915.39 on mainnet, Circle $0.609 / total $6.091 on testnet. Whether this 10:90 split is a fixed protocol parameter or a configuration default is not determinable from this dataset alone.
 
