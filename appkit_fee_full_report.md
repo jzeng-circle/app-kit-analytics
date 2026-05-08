@@ -20,41 +20,43 @@
 
 *Bridge wallet counts are excluded — the address fields in the bridge exports do not reliably identify a unique developer or end-user, so wallet-level statistics for bridge are not accurate.*
 
+*The observations below are deductions from observed transaction data. The report does not have direct visibility into how developers configure fees in their applications, so configuration claims are inferences, not direct evidence.*
+
 ### Swap Kit — Key Insights
 
-**Fees follow percentage-rate (bps) clusters.** Effective rates fall into clear bands — ~1, ~2, ~10, and ~51 bps — which suggests developers configure percentage-based fees on swap rather than flat dollar amounts. Clustering by bps is the natural lens for this product.
+**Effective fee rates cluster at recognizable bps values.** Observed rates fall into clear bands — ~1, ~2, ~10, and ~51 bps — a pattern consistent with percentage-rate configuration. Clustering by bps gives the cleanest separation in the swap data; whether this reflects how developers actually configure fees is not directly observable from this dataset.
 
-**Adoption is broad on testnet but revenue is concentrated.** Testnet has 60.0% txn-level fee adoption across 1,820 unique wallets, but the **~51 bps tier alone (6.6% of txns, 253 wallets) generates 97.4% of Circle fees** ($143.93 of $147.71). The ~2 bps tier dominates by transaction count (51.8%) but contributes only $0.64 because its average transaction size is $6.20.
+**Adoption is broad on testnet but revenue is concentrated.** Testnet has 60.0% txn-level fee adoption across 1,820 unique wallets. The **~51 bps tier alone (6.6% of txns, 253 wallets) generates 97.4% of Circle fees** ($143.93 of $147.71). The ~2 bps tier dominates by transaction count (51.8%) but contributes only $0.64, because its average transaction size is $6.20.
 
-**Same wallets experiment across fee rates.** 437 of 1,820 testnet wallets appear in multiple fee-rate clusters — the same developer trying different configurations rather than picking one and standardizing.
+**Wallets appear in multiple fee-rate clusters.** 437 of 1,820 testnet wallets show up in more than one cluster. This is consistent with the same developer using different rates across transactions, but could also reflect app-level fee logic, A/B tests, or other factors not visible in the data.
 
-**Blended effective Circle rate on testnet is ~2.45 bps** ($147.71 Circle / $603K volume). The Circle:developer split is **9.1:90.9** ($147.71 of $1,624.84 total fees).
+**Blended effective Circle rate on testnet is ~2.45 bps** ($147.71 Circle / $603K volume). The Circle:developer share in the observed data is **9.1:90.9** ($147.71 of $1,624.84 total fees).
 
-**Mainnet is essentially dormant.** 56 transactions across 22 wallets, $66 total volume, ~$0 in fees. No developer has configured meaningful custom fees on swap mainnet yet — there is a clear testnet-to-mainnet adoption gap.
+**Mainnet shows minimal fee activity.** 56 transactions across 22 wallets, $66 total volume, ~$0 in fees — only 2 of 56 transactions carry any fee at all, both at $0.00000001. Whatever has been configured, no meaningful fee revenue is being collected on swap mainnet in this sample.
 
 ### Bridge Kit — Key Insights
 
-**Fees are flat-dollar, not basis points.** The dominant >$1 tier on mainnet is filled with discrete developer-configured amounts — $1.00, $1.25, $5.00, $50.00, $100.00 — applied uniformly regardless of bridge size. The same $1.00 fee can land on a $5 bridge (2,000 bps effective) or a $1.99M bridge (0.005 bps effective). Effective bps is the wrong lens for bridge; developers configure absolute dollar amounts.
+**Observed fees cluster around discrete dollar values.** In the >$1 mainnet tier, the most common fee values are $1.00, $1.25, $5.00, $50.00, and $100.00 — round dollar figures that appear on widely varying notional sizes. The same $1.00 fee is observed on both a $5 bridge (2,000 bps effective) and a $1.99M bridge (0.005 bps effective). **This pattern is consistent with flat-dollar fee configuration; the underlying configuration mechanism is not directly observable from this data.** Effective bps may therefore be a less meaningful lens for bridge than for swap.
 
-**Mainnet revenue is extremely concentrated in one tier.** The **>$1.0 tier (1.8% of txns, just 78 transactions) generates 95.5% of Circle fees** ($87.38 of $91.54), with average notional of **$221K per transaction**. The remaining 4,374 transactions contribute $4.16 combined. Bridge revenue depends almost entirely on a small set of large-notional, high-fee transactions.
+**Mainnet revenue is concentrated in one tier.** The **>$1.0 tier (1.8% of txns, just 78 transactions) generates 95.5% of Circle fees** ($87.38 of $91.54), with average notional of **$221K per transaction**. The remaining 4,374 transactions contribute $4.16 combined.
 
-**ETH is the dominant fee-generating destination.** 64.1% of mainnet Circle fees route to ETH, followed by HYPEREVM (16.1%), BASE (6.1%), and ARB (5.6%). The top four destinations together account for 91.9% of fees.
+**ETH is the dominant fee-generating destination.** 64.1% of mainnet Circle fees route to ETH, followed by HYPEREVM (16.1%), BASE (6.1%), and ARB (5.6%). The top four destinations together account for 91.9% of Circle fees.
 
-**Testnet looks like integration testing, not fee-bearing usage.** $51.8M in testnet volume but only **1.7% txn-level fee adoption** and $0.61 in Circle fees. Most testnet bridges are fee-free — developers building or QA'ing rather than actively configuring fees. Mainnet, by contrast, has 18.8% txn-level fee adoption.
+**Testnet has wide volume reach but minimal fee activity.** $51.8M in testnet volume but only **1.7% txn-level fee adoption** and $0.61 in Circle fees. Most testnet bridges are fee-free; whether this reflects integration testing, unconfigured fees, or other usage patterns cannot be determined from the data alone. Mainnet, by contrast, has 18.8% txn-level fee adoption.
 
-**Fees barely scale with notional on mainnet.** Because fees are absolute amounts, the blended effective Circle rate is **0.034 bps** on $26.9M total volume, or **0.051 bps** on fee-bearing volume only. The rate falls as notional grows.
+**Effective rate falls as notional grows.** Blended effective Circle rate is **0.034 bps** on $26.9M total volume, or **0.051 bps** on fee-bearing volume only. This is what would be expected under flat-fee behavior, and is consistent with — but not direct evidence of — flat-amount configuration.
 
-**Circle:developer split is exactly 10:90** in every fee-bearing transaction — Circle $91.54 / total $915.39 on mainnet, Circle $0.609 / total $6.091 on testnet. Circle takes 10% of every developer-configured bridge fee.
+**Circle's share of fee revenue is consistently 10%** in the observed data — Circle $91.54 / total $915.39 on mainnet, Circle $0.609 / total $6.091 on testnet. Whether this 10:90 split is a fixed protocol parameter or a configuration default is not determinable from this dataset alone.
 
 ---
 
 ## Swap Kit
 
-*Transactions are clustered by effective fee rate in basis points (bps); this produces the clearest separation in the swap data, though it is not conclusive about how developers configure fees.*
+*Transactions are clustered by effective fee rate in basis points (bps); this produces the clearest separation in the swap data. Whether developers configure fees as percentages or by some other mechanism is not directly visible in this dataset, so the clustering is an analytical lens, not direct evidence of configuration.*
 
 ### Testnet (arc_testnet) — 9,976 transactions (sample)
 
-*1,820 unique wallets. 437 wallets appear in more than one cluster, meaning the same developer used different fee rates across transactions.*
+*1,820 unique wallets. 437 wallets appear in more than one cluster, consistent with the same developer using different fee rates across transactions, though other explanations (app-level fee logic, A/B tests) cannot be ruled out from the data.*
 
 | Cluster | Txns | % Txns | Wallets | % Wallets | Avg Txns/Wallet | Avg Vol/Txn | Avg Fee/Txn | Avg Bps | Volume | Circle Fee |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -78,15 +80,15 @@
 
 ### Mainnet (base, arbitrum, ethereum, solana) — 56 transactions
 
-56 transactions across 22 wallets, total volume $65.80. 2 transactions carry a fee of $0.00000001 each — negligibly small, effectively zero. No developer has configured meaningful custom fees on swap for mainnet.
+56 transactions across 22 wallets, total volume $65.80. 2 transactions carry a fee of $0.00000001 each — negligibly small, effectively zero. No meaningful fee revenue is being collected on swap mainnet in this sample; whether this is because no fees are configured or for other reasons is not visible in the data.
 
 ---
 
 ## Bridge Kit
 
-*Transactions are clustered by absolute fee amount per transaction; within each fee tier the fee value has low variance while effective bps varies widely, making flat fee the cleaner lens for bridge data, though this is not conclusive.*
+*Transactions are clustered by absolute fee amount per transaction; within each cluster the fee value has low variance while effective bps varies widely, which is consistent with flat-amount fee structures. This is an observation about the data, not direct evidence of how fees are configured.*
 
-**Fee structure**: Bridge developers configure flat dollar amounts, not percentage rates. On mainnet >$1 fees, the most common configured values are $1.00, $1.25, $5.00, $50.00, and $100.00 — discrete dev-set amounts, applied uniformly regardless of bridge size. The Circle/dev split is consistently **10:90** in every fee-bearing transaction (Circle $91.54 / $915.39 mainnet = 10.0%; testnet $0.609 / $6.091 = 10.0%).
+**Observed fee structure**: Bridge fee values in the data cluster around round dollar figures. In the >$1 mainnet tier, the most common observed values are $1.00, $1.25, $5.00, $50.00, and $100.00, appearing on widely varying notional sizes. Circle's share of total fees is exactly **10:90** in every observed fee-bearing transaction (mainnet $91.54 / $915.39 = 10.0%; testnet $0.609 / $6.091 = 10.0%). The underlying developer configuration is not directly visible in this dataset, so these are deductions from observed behavior rather than concrete evidence of how fees are set.
 
 ### Testnet (arc_testnet, arbitrum_sepolia, polygon_amoy) — 10,000 transactions (sample)
 
@@ -100,10 +102,10 @@
 | >$1.0 | 3 | 0.0% | $1.73 | $1.03333 | $5 | $0.3100 | 50.9% |
 | **Total** | **10,000** | **100%** | | | **$51,815,129** | **$0.609** | 100% |
 
-- **No fee (98.3% of txns)**: 9,832 transactions across $51.8M of testnet volume. Fee adoption on testnet is far lower than mainnet, suggesting most testnet activity is integration testing rather than fee-bearing usage.
+- **No fee (98.3% of txns)**: 9,832 transactions across $51.8M of testnet volume. Testnet fee adoption (1.7%) is much lower than mainnet (18.8%) — what drives this gap (integration testing, unconfigured fees, or other usage patterns) cannot be determined from this data alone.
 - **Sub-cent (0.3% of txns)**: 32 transactions on very small notionals (avg $6.38). Combined Circle fees $0.009 — 1.4% of total.
 - **$0.01–$1.0 (1.3% of txns)**: 133 transactions, avg amount $33.63, avg fee $0.022/txn. Largest fee-paying tier by transaction count, generating 47.7% of Circle fees.
-- **>$1.0 (3 txns)**: Three $1.00–$1.10 fees on $0.10–$5.00 notionals (one arbitrum_sepolia, two polygon_amoy). Together they generate 50.9% of all testnet bridge Circle fees — a small number of outlier transactions dominates fee revenue at this volume scale.
+- **>$1.0 (3 txns)**: Three $1.00–$1.10 fees on $0.10–$5.00 notionals (one arbitrum_sepolia, two polygon_amoy). Together they generate 50.9% of all testnet bridge Circle fees — three outlier transactions account for half the fee revenue at this volume scale.
 
 | Total Circle fees | **$0.609** | Total developer fees | **$5.482** | Total volume | **$51,815,129** |
 |---|---|---|---|---|---|
@@ -123,9 +125,9 @@
 | **Total** | **4,452** | **100%** | | | **$26,864,986** | **$91.54** | 100% |
 
 - **No fee (81.2% of txns)**: 3,613 transactions, $8.8M in volume — the dominant pattern by transaction count.
-- **Sub-cent (11.9% of txns)**: 531 transactions across very small notional sizes (avg $28.11). Combined Circle fees $0.08, only 0.1% of total — these are essentially flow-through transactions where the fee is too small to be material.
+- **Sub-cent (11.9% of txns)**: 531 transactions across very small notional sizes (avg $28.11). Combined Circle fees $0.08, only 0.1% of total.
 - **$0.01–$1.0 (5.2% of txns)**: 230 transactions, avg amount $3,550, avg fee $0.18/txn. Generates 4.5% of Circle fees ($4.09).
-- **>$1.0 (1.8% of txns)**: 78 transactions, avg fee $11.20/txn, avg transaction size $221,167. Generates **95.5% of all mainnet bridge Circle fees** ($87.38 of $91.54). Most common discrete fee values: $5.00 (4 txns), $100.00 (3), $1.25 (3), $1.00 (3), $50.00 (2), $1.75 (2), $2.00 (2), $2.25 (2). Largest single source amount in this tier: $1.99M.
+- **>$1.0 (1.8% of txns)**: 78 transactions, avg fee $11.20/txn, avg transaction size $221,167. Generates **95.5% of all mainnet bridge Circle fees** ($87.38 of $91.54). Most common observed fee values: $5.00 (4 txns), $100.00 (3), $1.25 (3), $1.00 (3), $50.00 (2), $1.75 (2), $2.00 (2), $2.25 (2). Largest single source amount in this tier: $1.99M.
 
 ### Destination chain (mainnet, fee-bearing only)
 
