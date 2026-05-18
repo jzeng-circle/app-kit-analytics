@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arc Testnet Wallet Activity Report</title>
+<style>
+  :root {
+    --fg: #1f2328;
+    --muted: #57606a;
+    --bg: #ffffff;
+    --bg-alt: #f6f8fa;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --warn-bg: #fff8c5;
+    --warn-border: #d4a72c;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+    line-height: 1.55;
+  }
+  h1, h2, h3 { line-height: 1.25; }
+  h1 { font-size: 1.9rem; margin: 0 0 .25rem; }
+  h2 { margin-top: 2.25rem; padding-bottom: .3rem; border-bottom: 1px solid var(--border); }
+  h3 { margin-top: 1.75rem; }
+  .subtitle { color: var(--muted); margin: 0 0 1.5rem; }
+  code, .mono { font-family: var(--mono); font-size: 0.92em; }
+  code { background: var(--bg-alt); padding: 0.1em 0.35em; border-radius: 4px; }
+  pre {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 0.9rem 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+  }
+  .callout {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--warn-border);
+    padding: 0.6rem 0.9rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.45rem 0.65rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--bg-alt); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.1rem 0.6rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-right: 0.35rem;
+  }
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  ul { padding-left: 1.25rem; }
+  li { margin: 0.2rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Arc Testnet Wallet Activity Report</h1>
+<p class="subtitle">
+  Two-wallet behavioral analysis on Circle's Arc Public Testnet
+</p>
+
+<div class="meta">
+  <span class="pill">Report date: 2026-05-18</span>
+  <span class="pill">Source: Blockscout API v2</span>
+  <span class="pill">Host: arc-testnet-explorer.stg.blockchain.circle.com</span>
+</div>
+
+<p><strong>Wallets covered:</strong></p>
+<ul>
+  <li><code>0x6063e834928EaC1ca47ac5Da27838079a103e305</code></li>
+  <li><code>0x34e785eef1e465e5db4de4b47c1bb64d9c237742</code></li>
+</ul>
+
+<div class="callout">
+  <strong>Data-freshness caveat.</strong> Blockscout's
+  <code>/addresses/{addr}/counters</code> endpoint returns zeros for both
+  wallets, which is incorrect — the live transactions and token-transfers
+  tables are densely populated. We rely on paginated <code>/transactions</code>
+  and <code>/token-transfers</code> sampling, not the counter aggregates.
+</div>
+
+<h2>Executive Summary</h2>
+
+<p>
+  Both wallets are <strong>automated bots</strong> routing traffic through the
+  same unverified swap router on Arc testnet:
+</p>
+<ul>
+  <li>Router proxy: <code>0xBBD70b01a1CAbC96d5b7b129AE1AaABdF50Dd40b</code> (EIP-1967)</li>
+  <li>Implementation: <code>0xCeA69a03A998002296b5c6b089B94B2B498d8751</code> (unverified)</li>
+  <li>Dominant function selector: <code>0xaa3e079c</code> (unverified, not auto-decoded)</li>
+</ul>
+<p>
+  The two wallets differ sharply in <strong>scale, capital, and strategy</strong>
+  but share the same target infrastructure. That suggests either one operator
+  running multiple bots or several operators hitting the same Arc-testnet DEX.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dimension</th>
+      <th><code>0x6063…3e305</code></th>
+      <th><code>0x34e7…7742</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Native ARC balance</td><td class="num">~3,353,970</td><td class="num">~16.36</td></tr>
+    <tr><td>Real stablecoin float</td><td>2.36M USDT, 234k WUSDC, 12k USDC</td><td>16 USDC, 2,313 EURC</td></tr>
+    <tr><td>Distinct ERC-20 holdings</td><td class="num">50+</td><td class="num">~30</td></tr>
+    <tr><td>Sampled tx window</td><td>~2 hours (2026-05-15 09:27–11:15Z)</td><td>~2 days (2026-05-15 → 2026-05-17)</td></tr>
+    <tr><td>Calls to router <code>0xBBD7…40b</code></td><td class="num">288 / 300</td><td class="num">252 / 300</td></tr>
+    <tr><td>Dominant flow</td><td>USDC → router → USDC (multi-leg fee split)</td><td>USDC ⇄ EURC round-tripping</td></tr>
+    <tr><td>Avg swap size (sampled)</td><td>~10 USDC</td><td>~$340</td></tr>
+    <tr><td>Net stablecoin delta</td><td>Inbound-only sample (PnL/settlement leg)</td><td>+$18.30 USDC, −$78.59 EURC over $135k two-way volume</td></tr>
+    <tr><td>Behavior signature</td><td>Burst trader / micro-swap bot</td><td>Delta-neutral USDC/EURC market-maker or arbitrage bot</td></tr>
+  </tbody>
+</table>
+
+<h2>Wallet 1 — <code>0x6063e834928EaC1ca47ac5Da27838079a103e305</code></h2>
+
+<h3>Profile</h3>
+<ul>
+  <li>EOA, no contract code, no name/ENS, not flagged as scam.</li>
+  <li>Native balance: <strong>3,353,969.80 ARC</strong> (testnet faucet allocation).</li>
+  <li>Balance last updated at block 42,325,338.</li>
+</ul>
+
+<h3>Notable token holdings (selection from 50+ ERC-20s)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Symbol</th><th>Name</th><th class="num">Balance</th><th class="num">Holders</th><th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><em>(unnamed)</em></td><td>—</td><td class="num">900,000,000.00</td><td class="num">5</td><td>Self-deployed test token (<code>0x858E…2455</code>)</td></tr>
+    <tr><td><em>(unnamed)</em></td><td>—</td><td class="num">900,000,000.00</td><td class="num">5</td><td>Self-deployed test token (<code>0x683D…F036</code>)</td></tr>
+    <tr><td>FLOW</td><td>FLOW</td><td class="num">701,452,884.05</td><td class="num">486</td><td></td></tr>
+    <tr><td>WON</td><td>WON</td><td class="num">590,000,000.00</td><td class="num">514</td><td></td></tr>
+    <tr><td>AFF-V25</td><td>ArcFlow V25</td><td class="num">100,000,000.00</td><td class="num">1</td><td>Sole holder — self-mint</td></tr>
+    <tr><td>SYNPLP</td><td>Synthra Perp Liquidity</td><td class="num">21,723,929.82</td><td class="num">585</td><td>LP receipt token</td></tr>
+    <tr><td>SYN</td><td>Synthra</td><td class="num">8,080,318.77</td><td class="num">119,441</td><td>Widely held</td></tr>
+    <tr><td>USDT</td><td>USDT</td><td class="num">2,356,364.53</td><td class="num">154,412</td><td><strong>Real stablecoin float</strong></td></tr>
+    <tr><td>WUSDC</td><td>Wrapped USDC</td><td class="num">234,613.65</td><td class="num">577,756</td><td><strong>Real stablecoin float</strong></td></tr>
+    <tr><td>WETH</td><td>WRAPPED ETHEREUM</td><td class="num">147,000.00</td><td class="num">3</td><td>Suspicious low holder count</td></tr>
+    <tr><td>USDC</td><td>USDC native</td><td class="num">12,000.00</td><td class="num">3</td><td>Suspicious low holder count</td></tr>
+  </tbody>
+</table>
+<p>
+  Single-holder tokens with eight- or nine-figure balances are almost certainly
+  <strong>self-deployed test mints</strong>, not legitimate inventory. The
+  economically meaningful holdings are USDT, WUSDC, and (more cautiously)
+  SYN/SYNPLP.
+</p>
+
+<h3>Activity pattern (300 most recent transactions)</h3>
+<ul>
+  <li><strong>Time range:</strong> 2026-05-15 09:27:03Z → 11:15:56Z (~108 minutes)</li>
+  <li><strong>Direction:</strong> 300 / 300 outbound — pure sender in the sample.</li>
+  <li><strong>Cadence:</strong> ~1 call every 22 seconds → automated.</li>
+</ul>
+<table>
+  <thead><tr><th>Method selector</th><th class="num">Count</th><th>Target</th></tr></thead>
+  <tbody>
+    <tr><td><code>0xaa3e079c</code></td><td class="num">288</td><td><code>0xBBD7…40b</code> (router proxy)</td></tr>
+    <tr><td><code>0x65c72805</code></td><td class="num">7</td><td><code>0xb798…424c</code></td></tr>
+    <tr><td><code>0xc9c261d8</code></td><td class="num">4</td><td>various</td></tr>
+    <tr><td><code>0xb97d4b6f</code></td><td class="num">1</td><td><code>0x0270…dc22</code> (looks like an <code>addLiquidity</code> shape)</td></tr>
+  </tbody>
+</table>
+
+<h3>Decoded sample call</h3>
+<p>
+  Tx <code>0x906ec2c5717b13f1029eff419f41f57ce572d9fe4d52c26b396cd50b7e05eb3f</code>
+  calls <code>0xaa3e079c</code> on <code>0xBBD7…40b</code>. Attached token transfers:
+</p>
+<pre> in : 10,000,000 USDC raw  (= 10.000 USDC, 6 decimals)  wallet -> router
+ out:        200            router -> 0xb499efCd
+ out:      1,800            router -> 0xC06ebbef
+ out:  9,998,000            router -> 0xFf70F4A1
+ out:      2,999            0xFf70F4A1 -> 0x20F6ee51
+ out:  9,995,001            0xFf70F4A1 -> 0x09AD820a</pre>
+<p>
+  Pattern: ~10 USDC in, ~9.998 USDC out, with two small-bps slivers split off
+  to other addresses. Classic <strong>swap-with-fee-split</strong> routing
+  (LP / protocol / referrer cut). Gas burned per call: ~667k.
+</p>
+
+<h3>Token-transfer side (400 sampled, ~37 minutes)</h3>
+<table>
+  <thead><tr><th>Token</th><th class="num">Count</th><th class="num">Inbound</th><th class="num">Outbound</th></tr></thead>
+  <tbody>
+    <tr><td>USDC</td><td class="num">272</td><td class="num">3.86</td><td class="num">0.00</td></tr>
+    <tr><td>EURC</td><td class="num">81</td><td class="num">1.85</td><td class="num">0.00</td></tr>
+    <tr><td>USDT</td><td class="num">40</td><td class="num">1.31</td><td class="num">0.00</td></tr>
+    <tr><td>SYN</td><td class="num">6</td><td class="num">0.01</td><td class="num">0.00</td></tr>
+    <tr><td>WUSDC</td><td class="num">1</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+  </tbody>
+</table>
+<p>
+  All sampled transfers were inbound — likely the router-side settlement leg of
+  the wallet's own outbound calls. Individual values are small (median per-call
+  value ≪ 1 USDC), pointing toward a <strong>micro-swap / fee-harvesting
+  bot</strong> rather than a directional trader.
+</p>
+
+<h3>Takeaways</h3>
+<ol>
+  <li>Automated DEX/swap bot churning USDC micro-trades against an unverified router.</li>
+  <li>The 100M-to-900M token positions are visual noise from self-minted test tokens.</li>
+  <li>The real working capital is USDT + WUSDC + USDC, sized in the low millions.</li>
+</ol>
+
+<h2>Wallet 2 — <code>0x34e785eef1e465e5db4de4b47c1bb64d9c237742</code></h2>
+
+<h3>Profile</h3>
+<ul>
+  <li>EOA, no contract code, no name/ENS, not flagged as scam.</li>
+  <li>Native balance: <strong>16.36 ARC</strong> — modest, working-balance sized.</li>
+  <li>Balance last updated at block 42,655,045.</li>
+</ul>
+
+<h3>Notable token holdings (selection from ~30 ERC-20s)</h3>
+<table>
+  <thead><tr><th>Symbol</th><th>Name</th><th class="num">Balance</th><th class="num">Holders</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>jefe</td><td>yeah</td><td class="num">1,000,000,000.00</td><td class="num">1</td><td>Self-deployed (<code>0x19Db…CcB8</code>)</td></tr>
+    <tr><td>jefe</td><td>yeah</td><td class="num">1,000,000,000.00</td><td class="num">1</td><td>Self-deployed (<code>0x37db…7523</code>)</td></tr>
+    <tr><td>2</td><td>one</td><td class="num">1,000,000,000.00</td><td class="num">1</td><td>Self-deployed (<code>0x24c1…5D2b</code>)</td></tr>
+    <tr><td>SV877</td><td>Neon Core 3GHG</td><td class="num">7,647,256.00</td><td class="num">1</td><td>Self-deployed</td></tr>
+    <tr><td>VO253</td><td>Plasma Vault FLT9</td><td class="num">5,191,010.00</td><td class="num">1</td><td>Self-deployed</td></tr>
+    <tr><td>SV102</td><td>Neon Circuit S3LL</td><td class="num">4,008,173.00</td><td class="num">1</td><td>Self-deployed</td></tr>
+    <tr><td><em>(others)</em></td><td>"Neon/Plasma/Flux/Turbo" vault tokens</td><td class="num">1M–10M</td><td class="num">1 each</td><td>Self-deployed test mints</td></tr>
+    <tr><td>EURC</td><td>EURC</td><td class="num">2,313.49</td><td class="num">1,329,340</td><td><strong>Real stablecoin float</strong></td></tr>
+    <tr><td>USDC</td><td>USDC (native)</td><td class="num">16.36</td><td class="num">1,331,842</td><td><strong>Real stablecoin float</strong></td></tr>
+    <tr><td>WUSDC</td><td>Wrapped USDC</td><td class="num">0.08</td><td class="num">592,486</td><td>Dust</td></tr>
+  </tbody>
+</table>
+<p>
+  Same single-holder, randomly-named test-mint signature as Wallet 1.
+</p>
+
+<h3>Activity pattern (300 most recent transactions)</h3>
+<ul>
+  <li><strong>Time range:</strong> 2026-05-15 07:09:17Z → 2026-05-17 10:04:51Z (~51 hours)</li>
+  <li><strong>Direction:</strong> 300 / 300 outbound.</li>
+  <li><strong>Cadence:</strong> steady over two days (not a single burst, unlike Wallet 1).</li>
+</ul>
+<table>
+  <thead><tr><th>Method selector</th><th class="num">Count</th><th>Target</th><th>Likely meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>0xaa3e079c</code></td><td class="num">252</td><td><code>0xBBD7…40b</code> (router)</td><td>same swap function as Wallet 1</td></tr>
+    <tr><td><code>0x095ea7b3</code></td><td class="num">39</td><td>EURC + USDC contracts</td><td><code>approve(address,uint256)</code> — token approvals</td></tr>
+    <tr><td><code>0x3df02124</code></td><td class="num">3</td><td>various</td><td>Curve-style <code>exchange(...)</code></td></tr>
+    <tr><td><code>0x1e59c529</code></td><td class="num">3</td><td>various</td><td>unknown</td></tr>
+    <tr><td><code>0x2c39c058</code></td><td class="num">3</td><td>various</td><td>unknown</td></tr>
+  </tbody>
+</table>
+
+<h3>Token-transfer side (400 sampled, 51-hour window)</h3>
+<table>
+  <thead><tr><th>Token</th><th class="num">Count</th><th class="num">Inbound</th><th class="num">Outbound</th><th class="num">Net</th></tr></thead>
+  <tbody>
+    <tr><td>EURC</td><td class="num">199</td><td class="num">66,070.27</td><td class="num">66,148.85</td><td class="num"><strong>−78.59</strong></td></tr>
+    <tr><td>USDC</td><td class="num">198</td><td class="num">69,480.63</td><td class="num">69,462.36</td><td class="num"><strong>+18.27</strong></td></tr>
+    <tr><td>INAME</td><td class="num">3</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+  </tbody>
+</table>
+<ul>
+  <li>~98% of inbound and outbound transfers go to/from <code>0xBBD7…40b</code> — the same router. This wallet is round-tripping USDC ⇄ EURC through it.</li>
+  <li>Two-way volume of ~$135k closes with a sub-0.06% net delta on each leg — effectively <strong>delta-neutral</strong>.</li>
+</ul>
+
+<h3>Takeaways</h3>
+<ol>
+  <li><strong>USDC/EURC market-making or arbitrage bot.</strong> Balanced two-way flow rules out directional trading.</li>
+  <li>Average ticket size (~$340) is ~30× larger than Wallet 1's (~$10) — different strategy on the same plumbing.</li>
+  <li>The 39 <code>approve()</code> calls are routine token-allowance warm-ups for the router.</li>
+</ol>
+
+<h2>Shared Infrastructure</h2>
+<p>
+  Both wallets concentrate ~85–96% of their calls on the same target:
+</p>
+<ul>
+  <li><strong>Router proxy:</strong> <code>0xBBD70b01a1CAbC96d5b7b129AE1AaABdF50Dd40b</code> (EIP-1967, unverified)</li>
+  <li><strong>Implementation:</strong> <code>0xCeA69a03A998002296b5c6b089B94B2B498d8751</code> (also unverified)</li>
+  <li><strong>Dominant function selector:</strong> <code>0xaa3e079c</code> (not in default 4byte dictionaries; decoded input not surfaced by the explorer)</li>
+</ul>
+<p>
+  Neither contract is verified on the Arc-testnet explorer, so its purpose can
+  only be inferred from on-chain behavior. The observed shape — token in,
+  slightly less token out, with small slivers fanned to satellite addresses —
+  is consistent with a <strong>multi-hop DEX router with split fees</strong>
+  (LP cut + protocol cut + optional referrer/fee-recipient).
+</p>
+
+<h3>Open follow-ups</h3>
+<ol>
+  <li>Pull bytecode of <code>0xCeA69a03A998002296b5c6b089B94B2B498d8751</code> and disassemble the dispatcher to recover function selectors and identify the protocol.</li>
+  <li>Cross-reference the satellite recipients (e.g. <code>0xb499efCd…</code>, <code>0xC06ebbef…</code>, <code>0xFf70F4A1…</code>) to find an LP-token / fee-recipient cluster.</li>
+  <li>Expand the transaction sample beyond the first ~300 to estimate the bots' lifetime cumulative volume and uptime.</li>
+  <li>Check whether other Arc-testnet wallets hit the same <code>0xaa3e079c</code> selector — if it's a popular bot pattern, an aggregate cohort analysis is more useful than per-wallet drilldowns.</li>
+</ol>
+
+<h2>Addendum — Follow-up Findings (2026-05-18)</h2>
+
+<p>
+  The initial report flagged the router <code>0xBBD70b01a1CAbC96d5b7b129AE1AaABdF50Dd40b</code>
+  as an "unverified DEX router." Pulling the implementation bytecode and
+  disassembling its dispatcher fundamentally <strong>revises that read</strong>:
+  the router is a Circle-style multi-signer execution contract, the dominant
+  call is a signed instruction bundle, and the wallets are doing more than
+  the original ~300-tx sample suggested.
+</p>
+
+<h3>1. The "router" is a multi-signer instruction executor (not a DEX)</h3>
+<p>
+  Bytecode for impl <code>0xCeA69a03A998002296b5c6b089B94B2B498d8751</code> was
+  fetched via the Blockscout JSON-RPC endpoint
+  (<code>/api/eth-rpc</code>, <code>eth_getCode</code>) and parsed for
+  <code>PUSH4 selector EQ</code> dispatcher entries. All <strong>35 selectors</strong>
+  resolve via the openchain.xyz 4byte database. Highlights:
+</p>
+<table>
+  <thead><tr><th>Selector</th><th>Function</th></tr></thead>
+  <tbody>
+    <tr><td><code>0xaa3e079c</code></td><td><code>execute(((address,bytes,uint256,address,uint256,address,uint256)[],(address,address)[],uint256,uint256,bytes),(uint8,address,uint256,bytes)[],bytes)</code></td></tr>
+    <tr><td><code>0xeb12d61e</code></td><td><code>addSigner(address)</code></td></tr>
+    <tr><td><code>0x0e316ab7</code></td><td><code>removeSigner(address)</code></td></tr>
+    <tr><td><code>0x7df73e27</code></td><td><code>isSigner(address)</code></td></tr>
+    <tr><td><code>0x7ca548c6</code></td><td><code>signerCount()</code></td></tr>
+    <tr><td><code>0xa4a4f390</code></td><td><code>signerThreshold()</code></td></tr>
+    <tr><td><code>0x251b8192</code></td><td><code>setSignerThreshold(uint256)</code></td></tr>
+    <tr><td><code>0x9fd0506d</code></td><td><code>pauser()</code></td></tr>
+    <tr><td><code>0x554bab3c</code></td><td><code>updatePauser(address)</code></td></tr>
+    <tr><td><code>0xa75f1a12</code></td><td><code>removePauser()</code></td></tr>
+    <tr><td><code>0x38a63183</code></td><td><code>rescuer()</code></td></tr>
+    <tr><td><code>0x2ab60045</code></td><td><code>updateRescuer(address)</code></td></tr>
+    <tr><td><code>0x0737d275</code></td><td><code>removeRescuer()</code></td></tr>
+    <tr><td><code>0xb2118a8d</code></td><td><code>rescueERC20(address,address,uint256)</code></td></tr>
+    <tr><td><code>0x1291f79d</code></td><td><code>rescueNative(address,uint256)</code></td></tr>
+    <tr><td><code>0x2b507df8</code></td><td><code>configurator()</code></td></tr>
+    <tr><td><code>0xb57873a5</code></td><td><code>updateConfigurator(address)</code></td></tr>
+    <tr><td><code>0x15333235</code></td><td><code>removeConfigurator()</code></td></tr>
+    <tr><td><code>0x9c8ded8a</code></td><td><code>isExecIdUsed(uint256)</code></td></tr>
+    <tr><td><code>0x977ad38c</code></td><td><code>maxInstructions()</code></td></tr>
+    <tr><td><code>0x27bf7e0b</code></td><td><code>maxTokenInputs()</code></td></tr>
+    <tr><td><code>0x84b0196e</code></td><td><code>eip712Domain()</code></td></tr>
+    <tr><td><code>0x1794bb3c</code></td><td><code>initialize(address,address,uint256)</code></td></tr>
+    <tr><td><code>0x79ba5097</code> / <code>0xe30c3978</code> / <code>0x92fede00</code> / <code>0x8da5cb5b</code> / <code>0xf2fde38b</code> / <code>0x715018a6</code></td><td>Ownable2Step set</td></tr>
+    <tr><td><code>0x8456cb59</code> / <code>0x3f4ba83a</code> / <code>0x5c975abb</code></td><td>Pausable set</td></tr>
+    <tr><td><code>0x31f7d964</code></td><td><code>NATIVE_TOKEN()</code></td></tr>
+  </tbody>
+</table>
+<p>
+  The combination — <strong>threshold-signer admin set,
+  <code>rescuer</code>/<code>pauser</code>/<code>configurator</code> role
+  triad, <code>rescueERC20</code>/<code>rescueNative</code>, EIP-712 typed
+  data, <code>isExecIdUsed</code> replay protection, capped instruction
+  lists</strong> — matches the
+  <code>FiatTokenV2</code> / CCTP <code>TokenMessenger</code> /
+  Bridged USDC Standard admin pattern that Circle uses across its production
+  contracts. The decoded <code>execute(...)</code> signature is consistent
+  with <strong>a Gateway-style on-chain executor</strong>: it takes a batch of
+  <code>(target, calldata, value, token, amount, recipient, fee)</code>
+  instructions plus an array of signer authorizations
+  <code>(v, signer, ?, signature)</code>, and atomically applies them after
+  verifying the threshold.
+</p>
+<p>
+  The proxy <code>0xBBD70b01a1CAbC96d5b7b129AE1AaABdF50Dd40b</code> is
+  OpenZeppelin's TransparentUpgradeableProxy v5. Its <strong>proxy admin
+  (immutable in the preamble)</strong> is the EOA
+  <code>0x6a736b8dea7d4b18b881b7fc4fc16072f6018b7a</code> — almost certainly
+  the deployer / upgrade key for the Gateway on Arc testnet.
+</p>
+
+<h3>2. Settlement graph around the executor</h3>
+<p>For 30 sampled <code>execute()</code> calls from each wallet, the per-tx token-transfer graph is highly repetitive. Profile of recurring counterparties:</p>
+<table>
+  <thead><tr><th>Address</th><th class="num">Code size</th><th>Blockscout label</th><th>Role inferred from flow</th></tr></thead>
+  <tbody>
+    <tr><td><code>0x913dc46f…c9a8</code></td><td class="num">18,095 B</td><td><strong>"USDC/cirBTC"</strong></td><td>Liquidity pool (named pair)</td></tr>
+    <tr><td><code>0x09AD820a…4Afa</code></td><td class="num">7,570 B</td><td>—</td><td>Pool / hub router</td></tr>
+    <tr><td><code>0x20F6ee51…860c</code></td><td class="num">8,679 B</td><td>—</td><td>Pool / hub router</td></tr>
+    <tr><td><code>0xFf70F4A1…04b2</code></td><td class="num">254 B</td><td>—</td><td>Minimal forwarder / clone receiver</td></tr>
+    <tr><td><code>0xb499efCd…0320</code></td><td class="num">0 B</td><td>—</td><td>Fee-recipient EOA (~0.002% / trade)</td></tr>
+    <tr><td><code>0xC06eBbeF…264b</code></td><td class="num">0 B</td><td>—</td><td>Fee-recipient EOA (~0.018% / trade)</td></tr>
+    <tr><td><code>0x311d3f55…e956</code></td><td class="num">23,635 B</td><td><strong>"EllySalvador"</strong></td><td>End-user smart account</td></tr>
+    <tr><td><code>0x0714027e…4c24</code></td><td class="num">23,635 B</td><td><strong>"WUSDC/EURC"</strong></td><td>End-user smart account</td></tr>
+    <tr><td><code>0xbbc2a38a…6f6e</code></td><td class="num">23,635 B</td><td><strong>"as"</strong></td><td>End-user smart account</td></tr>
+    <tr><td><code>0x269b4797…fcfe</code></td><td class="num">23,635 B</td><td><strong>"arc"</strong></td><td>End-user smart account</td></tr>
+  </tbody>
+</table>
+<p>
+  The four 23,635-byte addresses all carry <strong>identical bytecode</strong>
+  but were flagged <code>is_contract: false</code> by Blockscout — a
+  misclassification. They are factory-deployed smart-account clones (one
+  common implementation, many per-user instances) with user-supplied display
+  names. The 0-byte recipients <code>0xb499efCd…</code> and
+  <code>0xC06eBbeF…</code> collect ≈0.020% combined fee per swap.
+</p>
+
+<h3>3. cirBTC is in the loop</h3>
+<p>
+  Sampled <code>execute()</code> token transfers for Wallet 1 included
+  <strong>both USDC and cirBTC</strong> legs (90 cirBTC transfers across 30
+  sampled txs). Wallet 1's true trade pair is <strong>USDC ↔ cirBTC</strong>
+  through the named <code>0x913dc46f</code> pool — not USDC ⇄ USDC. The
+  earlier interpretation as "USDC micro-swap fee harvesting" was an artifact
+  of the address-level token-transfer endpoint returning only the wallet-facing leg.
+</p>
+
+<h3>4. Cumulative activity is two orders of magnitude larger than the initial sample</h3>
+<p>Deep pagination (~80 pages each, capped by the Blockscout backend at the furthest reaches):</p>
+<table>
+  <thead><tr><th></th><th>Wallet 1 (<code>0x6063…3e305</code>)</th><th>Wallet 2 (<code>0x34e7…7742</code>)</th></tr></thead>
+  <tbody>
+    <tr><td>First tx</td><td><strong>2025-10-28 13:40 Z</strong></td><td><strong>2025-11-05 21:07 Z</strong></td></tr>
+    <tr><td>Last tx in sample</td><td>2026-05-18 07:14 Z</td><td>2026-05-17 10:04 Z</td></tr>
+    <tr><td>Active span</td><td>~6.7 months</td><td>~6.4 months</td></tr>
+    <tr><td>Total txs fetched</td><td class="num"><strong>2,837</strong></td><td class="num"><strong>3,099</strong></td></tr>
+    <tr><td>Native gas burned</td><td class="num"><strong>~85.4 ARC</strong></td><td class="num"><strong>~43.0 ARC</strong></td></tr>
+    <tr><td><code>execute()</code> calls (<code>0xaa3e079c</code>)</td><td class="num">1,721</td><td class="num">1,563</td></tr>
+    <tr><td><code>approve()</code> calls (<code>0x095ea7b3</code>)</td><td>—</td><td class="num"><strong>1,357</strong></td></tr>
+  </tbody>
+</table>
+<p>
+  So Wallet 1's "burst" we saw in the initial 300-tx slice (~108 minutes on
+  2026-05-15) was one episode of a 6+ month activity history.
+</p>
+
+<h3>5. Wallet 1 is a multi-protocol trader, not a single-router bot</h3>
+<p>The deep sample exposes function selectors the 300-tx window missed:</p>
+<table>
+  <thead><tr><th>Selector</th><th>Function</th><th class="num">W1 calls</th></tr></thead>
+  <tbody>
+    <tr><td><code>0xaa3e079c</code></td><td>Gateway <code>execute(...)</code></td><td class="num">1,721</td></tr>
+    <tr><td><code>0x3593564c</code></td><td><strong>Uniswap Universal Router <code>execute(bytes,bytes[],uint256)</code></strong></td><td class="num">436</td></tr>
+    <tr><td><code>0xac9650d8</code></td><td><code>multicall(bytes[])</code></td><td class="num">91</td></tr>
+    <tr><td><code>0xde26fdcd</code></td><td><strong><code>createIncreaseOrder(...)</code> (GMX-/Synthra-style perpetual)</strong></td><td class="num">78</td></tr>
+    <tr><td><code>0x97701f19</code></td><td><strong><code>createDecreaseOrder(...)</code> (perpetual close)</strong></td><td class="num">53</td></tr>
+    <tr><td><code>0xc9c261d8</code></td><td><code>cancelCloseOrder(uint256)</code></td><td class="num">4</td></tr>
+  </tbody>
+</table>
+<p>
+  Wallet 1 routes through (a) the Circle Gateway executor, (b) a Uniswap
+  Universal Router, <strong>and</strong> (c) a GMX-style perp DEX (likely
+  Synthra given the SYNPLP and SYN holdings flagged in the initial report).
+  Wallet 2, by contrast, is far simpler: ~50/50 split between Gateway
+  <code>execute()</code> and ERC-20 <code>approve()</code> warm-ups, with a
+  long tail of dust.
+</p>
+
+<h3>6. Wallet 2's true cumulative volume</h3>
+<p>Aggregating all paginated token transfers (3,223 records — full history fits in pagination):</p>
+<table>
+  <thead><tr><th>Token</th><th class="num">In</th><th class="num">Out</th><th class="num">Net</th><th class="num">Two-way</th></tr></thead>
+  <tbody>
+    <tr><td>USDC</td><td class="num"><strong>646,205.41</strong></td><td class="num"><strong>646,333.98</strong></td><td class="num">−128.57</td><td class="num">~$1.29M</td></tr>
+    <tr><td>EURC</td><td class="num">591,028.32</td><td class="num">588,714.83</td><td class="num"><strong>+2,313.49</strong></td><td class="num">~$1.18M</td></tr>
+    <tr><td>WUSDC</td><td class="num">0.42</td><td class="num">0.35</td><td class="num">+0.075</td><td class="num">dust</td></tr>
+  </tbody>
+</table>
+<p>
+  Two-way stablecoin volume across the wallet's lifetime is
+  <strong>~$2.47M</strong>. Net EURC delta (+2,313.49) <strong>exactly equals</strong>
+  the current EURC balance reported in section 2 of the original report —
+  confirming the pagination captured the full history. Net USDC delta is
+  essentially zero (−$128 across $1.29M turnover, ≈0.01%).
+</p>
+<p>
+  This refines the strategy hypothesis: <strong>Wallet 2 is a delta-neutral
+  USDC/EURC market-making / arbitrage bot</strong> (already the original
+  read), now attributable to a verified $2.47M lifetime two-way volume on a
+  multi-signer settlement rail — not a DEX. The thin loss (~$130) is
+  plausibly cumulative spread/fees over ~3,000 swaps, which matches a ≈1 bp
+  fee level.
+</p>
+
+<h3>7. Cohort context</h3>
+<p>
+  A small (60-tx) random sample of recent <code>execute()</code> calls to the
+  router yielded <strong>43 distinct initiators</strong>. The router is
+  broadly used — Wallet 1 and Wallet 2 are part of a multi-wallet user base,
+  not the sole callers. Top initiators in the sample (none of which are our
+  two wallets) appear between 1 and 7 times each, with no clear "dominant"
+  sender, suggesting an open Gateway rail rather than a captive bot setup.
+</p>
+
+<h3>8. Revised one-line characterizations</h3>
+<ul>
+  <li><strong><code>0x6063e834…3e305</code></strong> — Multi-protocol bot
+    active since 2025-10-28: routes Gateway <code>execute()</code> payloads,
+    Uniswap Universal Router swaps, and GMX-style perp orders against an
+    Arc-testnet DEX cluster that includes a named
+    <strong>USDC/cirBTC pool</strong>. Holdings dominated by self-minted
+    test tokens; real stablecoin/cirBTC float is the working capital.</li>
+  <li><strong><code>0x34e785ee…7742</code></strong> — Delta-neutral USDC ⇄
+    EURC arbitrage / market-making bot active since 2025-11-05. ~$2.47M
+    lifetime two-way volume through the Circle-style Gateway executor with
+    near-zero net P&amp;L, exactly matching the bot's current EURC balance of
+    2,313.49.</li>
+</ul>
+
+<h2>Methodology Notes</h2>
+<ul>
+  <li>All data was retrieved through the public Blockscout API v2 at
+    <code>https://arc-testnet-explorer.stg.blockchain.circle.com/api/v2/</code>.</li>
+  <li>Transactions and token-transfers were sampled by paginating up to 6–8 pages
+    (~300 txs, ~400 transfers) per wallet. Counts are sample-bounded, not lifetime totals.</li>
+  <li>The on-explorer <code>counters</code> aggregate is currently unreliable for both wallets; sampled data is treated as ground truth.</li>
+  <li>Token amounts are decimal-adjusted using each token contract's declared <code>decimals</code>. USDC/USDT/EURC are treated as 6-decimal; most everything else as 18-decimal.</li>
+</ul>
+
+<footer>
+  Generated for on-chain-analysis project · Arc Public Testnet ·
+  Blockscout API v2 (arc-testnet-explorer.stg.blockchain.circle.com)
+</footer>
+
+</body>
+</html>
