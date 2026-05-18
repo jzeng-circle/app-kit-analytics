@@ -45,12 +45,12 @@ app-kit-analytics/
 
 ## Reports
 
-| Report | Subject | Status |
-|---|---|---|
-| [custom-fee](reports/custom-fee/README.md) | App Kit custom-fee adoption across Swap Kit + Bridge Kit, testnet + mainnet. | Snapshot as of 2026-05-08. |
-| [app-kit-launch-feedback](reports/app-kit-launch-feedback/README.md) | GitHub adoption + Twitter response to the App Kit launch on 2026-04-10. | Snapshots as of 2026-04-14. |
-| [bridge-kit-usage](reports/bridge-kit-usage/README.md) | On-chain BridgeKit usage analysis (Oct 2025–Mar 2026). Separates a December whale spike from organic adoption; cross-validated with PCA / K-means / logistic regression. | Snapshot as of 2026-03-16. |
-| [arc-testnet-wallets](reports/arc-testnet-wallets/README.md) | Behavioral analysis of two automated wallets on Arc Public Testnet, plus the Gateway-style executor they hit. | Snapshot as of 2026-05-18 with follow-up addendum. |
+| Report | Subject | Read | Snapshot |
+|---|---|---|---|
+| [custom-fee](reports/custom-fee/README.md) | App Kit custom-fee adoption across Swap Kit + Bridge Kit, testnet + mainnet. | [report.md](reports/custom-fee/report.md) | 2026-05-08 |
+| [app-kit-launch-feedback](reports/app-kit-launch-feedback/README.md) | GitHub adoption + Twitter response to the App Kit launch on 2026-04-10. | [github-repos-report.md](reports/app-kit-launch-feedback/github-repos-report.md) · [twitter-feedback-report.md](reports/app-kit-launch-feedback/twitter-feedback-report.md) | 2026-04-14 |
+| [bridge-kit-usage](reports/bridge-kit-usage/README.md) | On-chain BridgeKit usage analysis. Separates a December whale spike from organic adoption; cross-validated with PCA / K-means / logistic regression. | [report.md](reports/bridge-kit-usage/report.md) · [report.html](reports/bridge-kit-usage/report.html) · [revised-phase-analysis.md](reports/bridge-kit-usage/revised-phase-analysis.md) | 2026-03-16 |
+| [arc-testnet-wallets](reports/arc-testnet-wallets/README.md) | Behavioral analysis of two automated wallets on Arc Public Testnet, plus the Gateway-style executor they hit. | [report.md](reports/arc-testnet-wallets/report.md) · [report.html](reports/arc-testnet-wallets/report.html) | 2026-05-18 |
 
 ## Adding a new report
 

@@ -4,16 +4,19 @@ Behavioral analysis of two automated wallets on Circle's Arc Public Testnet,
 covering activity profile, holdings, and the Gateway-style multi-signer
 execution contract they share.
 
-## Files
+## Reports
+
+- [**`report.md`**](report.md) — Main report (Markdown). Initial findings plus an addendum with follow-up findings dated 2026-05-18.
+- [**`report.html`**](report.html) — Same content, standalone HTML with inline styling.
+
+## Supporting files
 
 | Path | Description |
 |---|---|
-| `report.md` | Main report (Markdown). Initial findings plus an addendum with follow-up findings dated 2026-05-18. |
-| `report.html` | Same content, standalone HTML with inline styling. |
-| `working/fetch_wallet_data.py` | Reproduces the data using the shared `tools.arc_explorer` client. |
-| `working/arc_impl_selectors.txt` | Disassembled dispatcher selectors for impl `0xCeA69a03A998002296b5c6b089B94B2B498d8751`. |
-| `working/arc_satellite_recipients.txt` | Frequent token-transfer recipients across sampled `execute()` calls. |
-| `data/` | Cached API responses (empty by default; populated by the working script if you wire caching in). |
+| [`working/fetch_wallet_data.py`](working/fetch_wallet_data.py) | Reproduces the data using the shared `tools.arc_explorer` client. |
+| [`working/arc_impl_selectors.txt`](working/arc_impl_selectors.txt) | Disassembled dispatcher selectors for impl `0xCeA69a03A998002296b5c6b089B94B2B498d8751`. |
+| [`working/arc_satellite_recipients.txt`](working/arc_satellite_recipients.txt) | Frequent token-transfer recipients across sampled `execute()` calls. |
+| [`data/`](data/) | Cached API responses (empty by default; populated by the working script if you wire caching in). |
 
 ## Subjects
 

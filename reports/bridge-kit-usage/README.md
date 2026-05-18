@@ -4,17 +4,20 @@ On-chain analysis of BridgeKit usage from launch (Oct 14, 2025) through Mar 3,
 2026. The headline question: what's the real platform run-rate after the
 December spike?
 
-## Files
+## Reports
+
+- [**`report.md`**](report.md) — Main report. Investigative arc from raw aggregate numbers down to the organic baseline. Compiled 2026-03-16.
+- [**`report.html`**](report.html) — Standalone HTML render of the main report. Image paths rewritten to use `./charts/`.
+- [**`revised-phase-analysis.md`**](revised-phase-analysis.md) — Earlier companion piece (2026-03-04) with the raw Phase 1 vs Phase 2 comparison and outlier identification. The main report supersedes this on conclusions but the companion has the detailed phase tables.
+
+## Supporting files
 
 | Path | Description |
 |---|---|
-| `report.md` | Main report — investigative arc from raw aggregate numbers down to the organic baseline. Compiled 2026-03-16. |
-| `revised-phase-analysis.md` | Earlier companion piece (2026-03-04) with the raw Phase 1 vs Phase 2 comparison and outlier identification. The main report supersedes this on conclusions but the companion has the detailed phase tables. |
-| `report.html` | Standalone HTML render of the main report. Image paths rewritten to use `./charts/`. |
-| `charts/` | 19 PNGs. `01_` through `10_` are the raw-data exhibits from the earlier draft; `A_` through `I_` are the final-report exhibits including ML separation (PCA, K-means, logistic regression). |
-| `data/bridgekit-full-2026-03-04.csv` | Full dataset: 550 wallet-chain records, 245 unique wallets, ~$34.5M volume. |
-| `data/phase-1.csv` | Phase 1 wallets (Oct 14 – Dec 14, 2025). |
-| `data/phase-2.csv` | Phase 2 wallets (Dec 15, 2025 – Mar 3, 2026). |
+| [`charts/`](charts/) | 19 PNGs. `01_` through `10_` are the raw-data exhibits from the earlier draft; `A_` through `I_` are the final-report exhibits including ML separation (PCA, K-means, logistic regression). |
+| [`data/bridgekit-full-2026-03-04.csv`](data/bridgekit-full-2026-03-04.csv) | Full dataset: 550 wallet-chain records, 245 unique wallets, ~$34.5M volume. |
+| [`data/phase-1.csv`](data/phase-1.csv) | Phase 1 wallets (Oct 14 – Dec 14, 2025). |
+| [`data/phase-2.csv`](data/phase-2.csv) | Phase 2 wallets (Dec 15, 2025 – Mar 3, 2026). |
 
 ## Headline findings
 

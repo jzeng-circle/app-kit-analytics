@@ -4,13 +4,16 @@ Two-angle reception analysis of Circle's App Kit launch on April 10, 2026:
 public developer adoption (GitHub) and social-media response (Twitter/X).
 Both snapshots taken in the two weeks following launch.
 
-## Files
+## Reports
+
+- [**`github-repos-report.md`**](github-repos-report.md) — Adoption analysis of 23 confirmed public repos across App Kit (12), Bridge Kit (11), and Swap Kit (0). 35 stars, 22 forks total. Compiled 2026-04-14.
+- [**`twitter-feedback-report.md`**](twitter-feedback-report.md) — Sentiment + theme analysis of 100 replies (out of 129) to the @arc launch post. Compiled 2026-04-14. Tweet ID `2042595956819120176`.
+
+## Supporting files
 
 | Path | Description |
 |---|---|
-| `github-repos-report.md` | Adoption analysis of 23 confirmed public repos across App Kit (12), Bridge Kit (11), and Swap Kit (0). 35 stars, 22 forks total. Compiled 2026-04-14. |
-| `twitter-feedback-report.md` | Sentiment + theme analysis of 100 replies (out of 129) to the @arc launch post. Compiled 2026-04-14. Tweet ID `2042595956819120176`. |
-| `data/TwCommentExport-arc-2047668757745840263-2026-04-30_114403.xlsx` | Raw Twitter reply export (104 KB). |
+| [`data/TwCommentExport-arc-2047668757745840263-2026-04-30_114403.xlsx`](data/TwCommentExport-arc-2047668757745840263-2026-04-30_114403.xlsx) | Raw Twitter reply export (104 KB). |
 
 ## Headline findings
 
