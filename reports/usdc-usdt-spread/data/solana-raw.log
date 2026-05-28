@@ -1,0 +1,469 @@
+
+##################### SWEEP 1/3 on Solana #####################
+
+--- estimateSwap 100 USDC -> USDT (sweep 1) ---
+(node:6032) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'100'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'100.098014'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'100.098014'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'0.02'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 10000 USDC -> USDT (sweep 1) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'10000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'10009.718042'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'10009.718042'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'2.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 50000 USDC -> USDT (sweep 1) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'50000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'50048.428804'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'50048.428804'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'10.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 100000 USDC -> USDT (sweep 1) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'100000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'100096.449541'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'100096.449541'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'20.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 200000 USDC -> USDT (sweep 1) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'200000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'200191.592756'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'200191.592756'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'40.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 300000 USDC -> USDT (sweep 1) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'300000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'300287.024295'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'300287.024295'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'60.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 400000 USDC -> USDT (sweep 1) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'400000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'400381.865681'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'400381.865681'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'80.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 500000 USDC -> USDT (sweep 1) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'500000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'500476.921904'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'500476.921904'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'100.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 1000000 USDC -> USDT (sweep 1) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'1000000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'1000933.001994'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'1000933.001994'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'200.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+##################### SWEEP 2/3 on Solana #####################
+
+--- estimateSwap 100 USDC -> USDT (sweep 2) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'100'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'100.098014'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'100.098014'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'0.02'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 10000 USDC -> USDT (sweep 2) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'10000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'10009.718042'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'10009.718042'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'2.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 50000 USDC -> USDT (sweep 2) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'50000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'50048.428804'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'50048.428804'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'10.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 100000 USDC -> USDT (sweep 2) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'100000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'100096.472554'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'100096.472554'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'20.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 200000 USDC -> USDT (sweep 2) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'200000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'200193.919948'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'200193.919948'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'40.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 300000 USDC -> USDT (sweep 2) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'300000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'300289.313995'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'300289.313995'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'60.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 400000 USDC -> USDT (sweep 2) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'400000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'400381.797829'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'400381.797829'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'80.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 500000 USDC -> USDT (sweep 2) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'500000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'500476.935986'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'500476.935986'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'100.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 1000000 USDC -> USDT (sweep 2) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'1000000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'1000933.167867'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'1000933.167867'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'200.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+##################### SWEEP 3/3 on Solana #####################
+
+--- estimateSwap 100 USDC -> USDT (sweep 3) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'100'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'100.105762'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'100.105762'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'0.02'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 10000 USDC -> USDT (sweep 3) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'10000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'10009.981948'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'10009.981948'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'2.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 50000 USDC -> USDT (sweep 3) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'50000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'50048.428804'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'50048.428804'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'10.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 100000 USDC -> USDT (sweep 3) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'100000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'100098.215993'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'100098.215993'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'20.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 200000 USDC -> USDT (sweep 3) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'200000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'200192.047285'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'200192.047285'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'40.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 300000 USDC -> USDT (sweep 3) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'300000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'300287.024295'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'300287.024295'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'60.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 400000 USDC -> USDT (sweep 3) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'400000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'400381.403109'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'400381.403109'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'80.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 500000 USDC -> USDT (sweep 3) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'500000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'500477.317077'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'500477.317077'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'100.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 1000000 USDC -> USDT (sweep 3) ---
+{
+  tokenIn: [32m'USDC'[39m,
+  tokenOut: [32m'USDT'[39m,
+  amountIn: [32m'1000000'[39m,
+  chain: [32m'Solana'[39m,
+  fromAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  toAddress: [32m'2s3EbN8jEtbgd5wQYVxDBDve1suh3UwH9o39aS3Aigpd'[39m,
+  stopLimit: { amount: [32m'1000933.167867'[39m, token: [32m'USDT'[39m },
+  estimatedOutput: { amount: [32m'1000933.167867'[39m, token: [32m'USDT'[39m },
+  fees: [
+    { token: [32m'USDC'[39m, amount: [32m'200.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'USDC'[39m, amount: [32m'0.0'[39m, type: [32m'swap'[39m },
+    { token: [32m'SOL'[39m, amount: [32m'0.00000651'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+========================= SPREAD ANALYSIS (per-sweep bips, averaged) =========================
+Pair: USDC -> USDT on Solana
+Sweeps: 3
+Method: bips = ((sweep_$100_rate - sweep_N_rate) / sweep_$100_rate) * 10_000, computed per sweep using that sweep's own $100 quote as benchmark. Then averaged across sweeps.
+
+  amountIn |    sweep 1 amountOut |    sweep 2 amountOut |    sweep 3 amountOut |   sweep 1 bips |   sweep 2 bips |   sweep 3 bips |   avg bips
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+       100 |           100.098014 |           100.098014 |           100.105762 |           0.00 |           0.00 |           0.00 |       0.00
+     10000 |         10009.718042 |         10009.718042 |         10009.981948 |           0.08 |           0.08 |           0.59 |       0.25
+     50000 |         50048.428804 |         50048.428804 |         50048.428804 |           0.12 |           0.12 |           0.89 |       0.37
+    100000 |        100096.449541 |        100096.472554 |        100098.215993 |           0.16 |           0.15 |           0.75 |       0.35
+    200000 |        200191.592756 |        200193.919948 |        200192.047285 |           0.22 |           0.11 |           0.97 |       0.43
+    300000 |        300287.024295 |        300289.313995 |        300287.024295 |           0.23 |           0.16 |           1.01 |       0.47
+    400000 |        400381.865681 |        400381.797829 |        400381.403109 |           0.25 |           0.26 |           1.04 |       0.52
+    500000 |        500476.921904 |        500476.935986 |        500477.317077 |           0.26 |           0.26 |           1.03 |       0.52
+   1000000 |       1000933.001994 |       1000933.167867 |       1000933.167867 |           0.47 |           0.47 |           1.24 |       0.73
+==================================================================================================
