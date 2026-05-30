@@ -27,6 +27,8 @@ Motivation: App Kit is planning to support larger USDC ↔ USDT swap volume base
 | [`data/ethereum-usdt-usdc-2026-05-30.log`](data/ethereum-usdt-usdc-2026-05-30.log) | Reverse Ethereum (Section 1 & 2 reverse source). |
 | [`data/avalanche-usdt-usdc-2026-05-30.log`](data/avalanche-usdt-usdc-2026-05-30.log) | Reverse Avalanche. |
 | [`data/solana-usdt-usdc-2026-05-30.log`](data/solana-usdt-usdc-2026-05-30.log) | Reverse Solana. |
+| [`data/ethereum-usdc-usdt-2026-05-30-spread.log`](data/ethereum-usdc-usdt-2026-05-30-spread.log) | Same-window Ethereum forward run for Section 3 round-trip spread (finished 14:05:50Z). |
+| [`data/ethereum-usdt-usdc-2026-05-30-spread.log`](data/ethereum-usdt-usdc-2026-05-30-spread.log) | Same-window Ethereum reverse run for Section 3 round-trip spread (finished 14:05:54Z, 4 sec after forward). |
 
 ## Headline findings
 
@@ -44,6 +46,6 @@ Per-chain ordering is consistent across directions: **Ethereum tightest < Solana
 
 Internal Li.fi slippage ($100 → $1M) is sub-1-bip on Avalanche and Solana in both directions; Ethereum has occasional anomalous `$100` quotes (small-trade routes paying well above par) but normal-route rates from $10K up.
 
-The report also includes a round-trip spread section combining both directions (`spread = 1 − forward × reverse`) — Li.fi's implicit bid-ask at $1M lands ~2.5–3.6 bips depending on chain, vs Binance's ~0.10-bip top-of-book spread.
+Section 3 of the report computes the round-trip spread (`spread = 1 − forward × reverse`) using a same-window Ethereum run (forward and reverse 4 seconds apart). At $1M, Li.fi Ethereum's implicit bid-ask is **4.33 bips** vs Binance's **0.10 bips** top-of-book — about 43× wider, the cost of using an on-chain AMM vs an order book.
 
 Snapshot dates: forward 2026-05-28 / 2026-05-29 · reverse 2026-05-30. Both Binance and on-chain rates drift intraday, so absolute numbers are point-in-time; the structural ordering and ~2-bip magnitude is the stable headline.

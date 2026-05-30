@@ -1,0 +1,458 @@
+
+##################### SWEEP 1/3 on Ethereum #####################
+
+--- estimateSwap 100 USDT -> USDC (sweep 1) ---
+(node:41062) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'100'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'100.246929'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'100.246929'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'0.02'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.00024464169166332'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 10000 USDT -> USDC (sweep 1) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'10000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'9990.427124'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'9990.427124'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'2.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000246850091413216'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 50000 USDT -> USDC (sweep 1) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'50000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'49943.089717'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'49943.089717'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'10.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000443353820634147'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 100000 USDT -> USDC (sweep 1) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'100000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'99883.431784'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'99883.431784'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'20.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000443353820634147'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 200000 USDT -> USDC (sweep 1) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'200000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'199763.517587'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'199763.517587'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'40.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000557587723146363'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 300000 USDT -> USDC (sweep 1) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'300000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'299642.547863'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'299642.547863'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'60.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000352745893506137'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 400000 USDT -> USDC (sweep 1) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'400000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'399523.022153'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'399523.022153'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'80.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000352745893506137'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 500000 USDT -> USDC (sweep 1) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'500000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'499403.329903'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'499403.329903'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'100.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000352745893506137'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 1000000 USDT -> USDC (sweep 1) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'1000000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'998802.027558'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'998802.027558'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'200.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000645264090630954'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+##################### SWEEP 2/3 on Ethereum #####################
+
+--- estimateSwap 100 USDT -> USDC (sweep 2) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'100'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'100.113459'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'100.113459'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'0.02'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.00022939058186982'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 10000 USDT -> USDC (sweep 2) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'10000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'9989.077659'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'9989.077659'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'2.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.00023834193257773'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 50000 USDT -> USDC (sweep 2) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'50000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'49941.524788'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'49941.524788'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'10.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000444941772828707'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 100000 USDT -> USDC (sweep 2) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'100000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'99883.445154'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'99883.445154'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'20.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000444941772828707'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 200000 USDT -> USDC (sweep 2) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'200000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'199763.545817'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'199763.545817'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'40.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000498597220100655'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 300000 USDT -> USDC (sweep 2) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'300000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'299642.547863'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'299642.547863'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'60.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000359507993768235'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 400000 USDT -> USDC (sweep 2) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'400000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'399523.01268'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'399523.01268'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'80.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.00035461704496124'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 500000 USDT -> USDC (sweep 2) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'500000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'499403.404974'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'499403.404974'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'100.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.00035461704496124'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 1000000 USDT -> USDC (sweep 2) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'1000000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'998802.027558'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'998802.027558'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'200.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000661567425956151'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+##################### SWEEP 3/3 on Ethereum #####################
+
+--- estimateSwap 100 USDT -> USDC (sweep 3) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'100'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'100.248463'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'100.248463'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'0.02'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000323124314876756'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 10000 USDT -> USDC (sweep 3) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'10000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'9990.97966'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'9990.97966'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'2.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000391252341417008'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 50000 USDT -> USDC (sweep 3) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'50000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'49941.10717'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'49941.10717'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'10.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000444902788775772'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 100000 USDT -> USDC (sweep 3) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'100000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'99883.614371'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'99883.614371'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'20.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000444902788775772'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 200000 USDT -> USDC (sweep 3) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'200000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'199763.932239'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'199763.932239'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'40.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000494115154907673'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 300000 USDT -> USDC (sweep 3) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'300000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'299642.547863'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'299642.547863'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'60.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000356276250387993'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 400000 USDT -> USDC (sweep 3) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'400000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'399522.968189'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'399522.968189'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'80.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000356276250387993'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 500000 USDT -> USDC (sweep 3) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'500000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'499403.352909'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'499403.352909'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'100.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000348812783468604'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+--- estimateSwap 1000000 USDT -> USDC (sweep 3) ---
+{
+  tokenIn: [32m'USDT'[39m,
+  tokenOut: [32m'USDC'[39m,
+  amountIn: [32m'1000000'[39m,
+  chain: [32m'Ethereum'[39m,
+  fromAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  toAddress: [32m'0x7a6ED11f28a54DA25FDEcd8A9938e26586B14394'[39m,
+  stopLimit: { amount: [32m'998801.886571'[39m, token: [32m'USDC'[39m },
+  estimatedOutput: { amount: [32m'998801.886571'[39m, token: [32m'USDC'[39m },
+  fees: [
+    { token: [32m'USDT'[39m, amount: [32m'200.0'[39m, type: [32m'provider'[39m },
+    { token: [32m'ETH'[39m, amount: [32m'0.000640611943164648'[39m, type: [32m'gas'[39m }
+  ]
+}
+
+========================= SPREAD ANALYSIS (per-sweep bips, averaged) =========================
+Pair: USDT -> USDC on Ethereum
+Sweeps: 3
+Method: bips = ((sweep_$100_rate - sweep_N_rate) / sweep_$100_rate) * 10_000, computed per sweep using that sweep's own $100 quote as benchmark. Then averaged across sweeps.
+
+  amountIn |    sweep 1 amountOut |    sweep 2 amountOut |    sweep 3 amountOut |   sweep 1 bips |   sweep 2 bips |   sweep 3 bips |   avg bips
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+       100 |           100.246929 |           100.113459 |           100.248463 |           0.00 |           0.00 |           0.00 |       0.00
+     10000 |          9990.427124 |          9989.077659 |          9990.979660 |          34.18 |          22.24 |          33.78 |      30.07
+     50000 |         49943.089717 |         49941.524788 |         49941.107170 |          35.99 |          23.01 |          36.53 |      31.85
+    100000 |         99883.431784 |         99883.445154 |         99883.614371 |          36.26 |          22.98 |          36.39 |      31.88
+    200000 |        199763.517587 |        199763.545817 |        199763.932239 |          36.43 |          23.14 |          36.56 |      32.04
+    300000 |        299642.547863 |        299642.547863 |        299642.547863 |          36.52 |          23.23 |          36.67 |      32.14
+    400000 |        399523.022153 |        399523.012680 |        399522.968189 |          36.53 |          23.24 |          36.68 |      32.15
+    500000 |        499403.329903 |        499403.404974 |        499403.352909 |          36.54 |          23.25 |          36.69 |      32.16
+   1000000 |        998802.027558 |        998802.027558 |        998801.886571 |          36.58 |          23.30 |          36.74 |      32.21
+==================================================================================================

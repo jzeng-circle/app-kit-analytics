@@ -197,61 +197,60 @@ All three chains within ~2–3 bips of Binance at $1M. Ethereum's $100 quote lan
 
 ---
 
-## Round-trip spread (forward × reverse)
+## Section 3 — Round-trip spread (forward × reverse) — Ethereum same-window
 
 Implicit bid-ask spread at each trade size, computed as the round-trip cost of swapping USDC → USDT → USDC on the same venue at the same amount:
 
 `spread_bips = (1 − forward_rate × reverse_rate) × 10_000`
 
-where `forward_rate` is USDT-per-USDC and `reverse_rate` is USDC-per-USDT. Positive bips = round-trip loss (you end up with less than 1 USDC). Negative bips = round-trip gain (anomalous; only seen on Ethereum's small-trade routes).
+where `forward_rate` is USDT-per-USDC and `reverse_rate` is USDC-per-USDT. Positive bips = round-trip loss; negative bips = round-trip gain (anomalous, only on Ethereum's small-trade routes).
 
-### Li.fi round-trip spread (per amount, per chain)
+Ethereum only, with both forward and reverse runs in the same minute (no cross-day drift). Binance comparison is from the same-window bookTicker.
 
-Forward rates from Direction A Section 1 (2026-05-28). Reverse rates from Direction B Section 1 (2026-05-30).
+**Test details (2026-05-30):**
+- Forward Ethereum: finished `14:05:50 UTC` · `usdc-usdt-spread.ts Ethereum`
+- Reverse Ethereum: finished `14:05:54 UTC` (4 seconds later) · `usdt-usdc-spread.ts Ethereum`
+- Binance USDCUSDT: bid 1.00099 · ask 1.00100 (stable in pre/post brackets at 14:04:10Z and 14:06:10Z)
 
-| amountIn | Ethereum (bips) | Avalanche (bips) | Solana (bips) |
+### Li.fi Ethereum round-trip spread
+
+| amountIn | forward rate (USDT/USDC) | reverse rate (USDC/USDT) | round-trip spread (bips) |
 |---:|---:|---:|---:|
-| 100        | **−33.55** (anomalous $100 routes) | 1.07 | 1.94 |
-| 10,000     | **−0.15** (Ethereum $10K favorable route) | 1.85 | 2.21 |
-| 50,000     | 1.99 | 2.40 | 2.33 |
-| 100,000    | 2.11 | 2.56 | 2.34 |
-| 200,000    | 2.18 | 2.76 | 2.46 |
-| 300,000    | 2.29 | 2.92 | 2.53 |
-| 400,000    | 2.34 | 3.05 | 2.61 |
-| 500,000    | 2.39 | 3.15 | 2.64 |
-| **1,000,000** | **2.53** | **3.64** | **3.07** |
+| 100        | 1.00077663 | 1.00202950 | **−28.08** (anomalous $100 routes both directions) |
+| 10,000     | 1.00077573 | 0.99901615 | 2.09 |
+| 50,000     | 1.00078030 | 0.99883814 | 3.82 |
+| 100,000    | 1.00078011 | 0.99883497 | 3.86 |
+| 200,000    | 1.00077973 | 0.99881833 | 4.03 |
+| 300,000    | 1.00077390 | 0.99880849 | 4.19 |
+| 400,000    | 1.00077212 | 0.99880750 | 4.21 |
+| 500,000    | 1.00077198 | 0.99880673 | 4.22 |
+| **1,000,000** | **1.00076576** | **0.99880201** | **4.33** |
 
-### Binance round-trip spread (USDCUSDT top-of-book)
+### Binance round-trip spread (same window, USDCUSDT top-of-book)
 
-Binance's bid-ask spread doesn't change with trade size at top-of-book; it's a constant 1 pip (≈ 0.10 bips) across every test window.
+| bid | ask | bid × (1/ask) | round-trip spread (bips) |
+|---:|---:|---:|---:|
+| 1.00099 | 1.00100 | 0.99999001 | **0.10** |
 
-| window | bid | ask | spread (bips) |
-|---|---:|---:|---:|
-| 2026-05-28 (forward) | 1.00117 | 1.00118 | 0.10 |
-| 2026-05-29 (forward rerun) | 1.00095 | 1.00096 | 0.10 |
-| 2026-05-30 (reverse) | 1.00099 | 1.00100 | 0.10 |
+Binance bid-ask is constant at top-of-book regardless of trade size (within displayed depth of ~$3–4M each side at this snapshot). For larger trades the effective Binance spread would widen by walking the book — not directly measurable from the public bookTicker.
 
-For very large trades the *effective* Binance spread would widen by walking the order book — not directly measurable from the public bookTicker. The 0.10 bips figure is the top-of-book ceiling for small/medium trades within the displayed depth (~$1–7M each side at our snapshots).
+### Side-by-side
 
-### Side-by-side comparison
+| amountIn | Li.fi Ethereum (bips) | Binance top-of-book (bips) |
+|---:|---:|---:|
+| 100        | −28.08 (anomalous) | 0.10 |
+| 10,000     | 2.09  | 0.10 |
+| 50,000     | 3.82  | 0.10 |
+| 100,000    | 3.86  | 0.10 |
+| 200,000    | 4.03  | 0.10 |
+| 300,000    | 4.19  | 0.10 |
+| 400,000    | 4.21  | 0.10 |
+| 500,000    | 4.22  | 0.10 |
+| **1,000,000** | **4.33** | **0.10** |
 
-| amountIn | Li.fi Ethereum (bips) | Li.fi Avalanche (bips) | Li.fi Solana (bips) | Binance top-of-book (bips) |
-|---:|---:|---:|---:|---:|
-| 100        | −33.55 | 1.07 | 1.94 | 0.10 |
-| 10,000     | −0.15  | 1.85 | 2.21 | 0.10 |
-| 50,000     | 1.99   | 2.40 | 2.33 | 0.10 |
-| 100,000    | 2.11   | 2.56 | 2.34 | 0.10 |
-| 200,000    | 2.18   | 2.76 | 2.46 | 0.10 |
-| 300,000    | 2.29   | 2.92 | 2.53 | 0.10 |
-| 400,000    | 2.34   | 3.05 | 2.61 | 0.10 |
-| 500,000    | 2.39   | 3.15 | 2.64 | 0.10 |
-| **1,000,000** | **2.53** | **3.64** | **3.07** | **0.10** |
+Li.fi Ethereum's round-trip spread at $1M is **~43× wider** than Binance's top-of-book bid-ask. This is the cost of using an on-chain AMM (per-swap fee + routing overhead) for a USDC ↔ USDT round-trip vs Binance's order book.
 
-Li.fi's round-trip spread at $1M (Ethereum 2.53 / Avalanche 3.64 / Solana 3.07 bips) is **~25–35× wider** than Binance's top-of-book spread (~0.10 bips). This is the cost of using an AMM (per-swap fee + routing overhead) vs an order book.
-
-### Caveat
-
-Li.fi forward and reverse Section 1 data were sampled 2 days apart (forward 2026-05-28, reverse 2026-05-30). The Li.fi round-trip column mixes the actual venue spread with 2-day market drift, so the per-amount numbers are approximate. A strict same-minute round-trip would require running both directions in a single test window.
+The round-trip spread grows monotonically with size from ~2 bips at $10K to ~4.3 bips at $1M; the jump from $10K (2.09) to $50K (3.82) is the biggest step (size impact begins to matter past $10K). Above $200K the spread stabilizes near 4.0–4.3 bips.
 
 ---
 
