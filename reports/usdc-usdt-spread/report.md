@@ -5,8 +5,8 @@
 Planning to support larger USDC ↔ USDT swap volume in App Kit. This report quantifies how competitive Li.fi's stablecoin liquidity and swap offering is, across three chains (Ethereum, Avalanche, Solana) and both directions (USDC → USDT and USDT → USDC).
 
 The report covers each direction in sequence, with two sections per direction:
-- **Section 1** — Internal Li.fi slippage (size-induced spread, no external benchmark).
-- **Section 2** — Binance price comparison (Li.fi vs CEX, same 1-minute window).
+- **Section 1** — Internal Li.fi slippage (how Li.fi price changes with trade amount, no external benchmark).
+- **Section 2** — Binance price comparison (Li.fi rate vs Binance rate in the same 1-minute window; reported as a "price difference" in bips).
 
 A final section compares the two directions side by side.
 
@@ -19,7 +19,7 @@ A final section compares the two directions side by side.
 - **Test amounts:** `$100, $10K, $50K, $100K, $200K, $300K, $400K, $500K, $1M` (9 amounts per direction).
 - **Sampling:** 3 interleaved sweeps. Each sweep walks all 9 amounts in order, then repeats (~30s per sweep).
 - **Benchmark:** each sweep's own `$100` quote (per-sweep, not pooled).
-- **Spread formula:**
+- **Slippage formula:**
   - `bips_sweep_N(A) = ((rate_sweep_N($100) − rate_sweep_N(A)) / rate_sweep_N($100)) × 10_000`
   - `avg_bips(A) = mean(bips_sweep_1(A), bips_sweep_2(A), bips_sweep_3(A))`
 - **Scripts:** `swap/usdc-usdt-spread.ts` (forward), `swap/usdt-usdc-spread.ts` (reverse). `SWEEPS = 3`.
@@ -29,7 +29,7 @@ A final section compares the two directions side by side.
 
 ## Direction A — USDC → USDT (forward)
 
-### Section 1 — Internal Li.fi slippage (size-induced spread)
+### Section 1 — Internal Li.fi slippage
 
 Per-chain Binance bid references (kline close of each test's finish minute, included in tables for cross-reference; summary in Section 2):
 - Ethereum: 1.00117 · window 01:22:58–01:23:58 UTC
@@ -40,7 +40,7 @@ Per-chain Binance bid references (kline close of each test's finish minute, incl
 
 Test window: 2026-05-28T01:22:58Z – 01:23:58Z · Binance bid: 1.00117
 
-| amountIn (USDC) | sweep 1 (USDT) | sweep 2 (USDT) | sweep 3 (USDT) | avg rate (USDT/USDC) | size-spread vs $100 (bips, avg) | gap vs Binance bid (bips) |
+| amountIn (USDC) | sweep 1 (USDT) | sweep 2 (USDT) | sweep 3 (USDT) | avg rate (USDT/USDC) | slippage vs $100 (bips, avg) | price diff vs Binance bid (bips) |
 |---:|---:|---:|---:|---:|---:|---:|
 | 100        | 100.096785      | 100.096785      | 100.096785      | 1.00096785 | 0.00 (bench) | 2.02 |
 | 10,000     | 10,009.673585   | 10,009.673585   | 10,009.673585   | 1.00096736 | 0.00 | 2.03 |
@@ -56,7 +56,7 @@ Test window: 2026-05-28T01:22:58Z – 01:23:58Z · Binance bid: 1.00117
 
 Test window: 2026-05-28T02:11:11Z – 02:12:11Z · Binance bid: 1.00114
 
-| amountIn (USDC) | sweep 1 (USDT) | sweep 2 (USDT) | sweep 3 (USDT) | avg rate (USDT/USDC) | size-spread vs $100 (bips, avg) | gap vs Binance bid (bips) |
+| amountIn (USDC) | sweep 1 (USDT) | sweep 2 (USDT) | sweep 3 (USDT) | avg rate (USDT/USDC) | slippage vs $100 (bips, avg) | price diff vs Binance bid (bips) |
 |---:|---:|---:|---:|---:|---:|---:|
 | 100        | 100.096684      | 100.110059      | 100.102722      | 1.00103155 | 0.00 (bench) | 1.08 |
 | 10,000     | 10,009.579344   | 10,009.579344   | 10,009.591227   | 1.00095833 | 0.73 | 1.81 |
@@ -72,7 +72,7 @@ Test window: 2026-05-28T02:11:11Z – 02:12:11Z · Binance bid: 1.00114
 
 Test window: 2026-05-28T02:15:19Z – 02:16:19Z · Binance bid: 1.00116
 
-| amountIn (USDC) | sweep 1 (USDT) | sweep 2 (USDT) | sweep 3 (USDT) | avg rate (USDT/USDC) | size-spread vs $100 (bips, avg) | gap vs Binance bid (bips) |
+| amountIn (USDC) | sweep 1 (USDT) | sweep 2 (USDT) | sweep 3 (USDT) | avg rate (USDT/USDC) | slippage vs $100 (bips, avg) | price diff vs Binance bid (bips) |
 |---:|---:|---:|---:|---:|---:|---:|
 | 100        | 100.098014      | 100.098014      | 100.105762      | 1.00100597 | 0.00 (bench) | 1.54 |
 | 10,000     | 10,009.718042   | 10,009.718042   | 10,009.981948   | 1.00098060 | 0.25 | 1.79 |
@@ -84,7 +84,7 @@ Test window: 2026-05-28T02:15:19Z – 02:16:19Z · Binance bid: 1.00116
 | 500,000    | 500,476.921904  | 500,476.935986  | 500,477.317077  | 1.00095412 | 0.52 | 2.05 |
 | **1,000,000** | **1,000,933.00** | **1,000,933.17** | **1,000,933.17** | **1.00093311** | **0.73** | **2.27** |
 
-#### Cross-chain comparison — size-induced spread vs $100 (avg of 3 sweeps)
+#### Cross-chain comparison — slippage vs $100 (avg of 3 sweeps)
 
 | amountIn | Ethereum (bips) | Avalanche (bips) | Solana (bips) |
 |---:|---:|---:|---:|
@@ -108,19 +108,19 @@ Formula: `((binance_close − lifi_rate) / binance_close) × 10_000`. Positive =
 
 #### Cross-chain comparison (USDC → USDT, vs Binance bid)
 
-| chain     | test window (UTC) | Binance close | Li.fi $100 rate | gap @ $100 (bips) | Li.fi $1M rate | gap @ $1M (bips) |
+| chain     | test window (UTC) | Binance close | Li.fi $100 rate | price diff @ $100 (bips) | Li.fi $1M rate | price diff @ $1M (bips) |
 |---|---|---:|---:|---:|---:|---:|
 | Ethereum  | 2026-05-29T01:33:50–01:34:50 | 1.00095 | 1.00076191 | 1.88 | 1.00074554 | **2.04** |
 | Avalanche | 2026-05-29T01:34:04–01:35:04 | 1.00095 | 1.00107659 | **−1.26** (anomalous $100 sweep) | 1.00068028 | **2.70** |
 | Solana    | 2026-05-29T01:33:42–01:34:42 | 1.00095 | 1.00079480 | 1.55 | 1.00071913 | **2.31** |
 
-All three chains within ~2–3 bips of Binance at $1M. Avalanche's $100 row shows a negative gap because sweep 1 hit an anomalous small-trade route (100.159964 vs ~100.0815 in sweeps 2–3); $10K+ tracks normally.
+All three chains within ~2–3 bips of Binance at $1M. Avalanche's $100 row shows a negative price difference because sweep 1 hit an anomalous small-trade route (100.159964 vs ~100.0815 in sweeps 2–3); $10K+ tracks normally.
 
 ---
 
 ## Direction B — USDT → USDC (reverse)
 
-### Section 1 — Internal Li.fi slippage (size-induced spread)
+### Section 1 — Internal Li.fi slippage
 
 Per-chain Binance ask references (kline close of each test's finish minute, inverted to USDC-per-USDT for comparison with Li.fi's rate; included in tables for cross-reference; summary in Section 2):
 - Ethereum: ask 1.00100 → 1/ask 0.99900100 · window 13:21:45–13:22:45 UTC
@@ -131,7 +131,7 @@ Per-chain Binance ask references (kline close of each test's finish minute, inve
 
 Test window: 2026-05-30T13:21:45Z – 13:22:45Z · Binance ask: 1.00100 (1/ask = 0.99900100)
 
-| amountIn (USDT) | sweep 1 (USDC) | sweep 2 (USDC) | sweep 3 (USDC) | avg rate (USDC/USDT) | size-spread vs $100 (bips, avg) | gap vs Binance ask (bips) |
+| amountIn (USDT) | sweep 1 (USDC) | sweep 2 (USDC) | sweep 3 (USDC) | avg rate (USDC/USDT) | slippage vs $100 (bips, avg) | price diff vs Binance ask (bips) |
 |---:|---:|---:|---:|---:|---:|---:|
 | 100        | **100.186010** | **100.266226** | **100.263112** | 1.00238449 | 0.00 (bench) | **−33.87** |
 | 10,000     | 9,989.940983   | 9,990.755371   | 9,990.755585   | 0.99904840 | 33.28 | **−0.47** |
@@ -149,7 +149,7 @@ Test window: 2026-05-30T13:21:45Z – 13:22:45Z · Binance ask: 1.00100 (1/ask =
 
 Test window: 2026-05-30T13:21:52Z – 13:22:52Z · Binance ask: 1.00100 (1/ask = 0.99900100)
 
-| amountIn (USDT) | sweep 1 (USDC) | sweep 2 (USDC) | sweep 3 (USDC) | avg rate (USDC/USDT) | size-spread vs $100 (bips, avg) | gap vs Binance ask (bips) |
+| amountIn (USDT) | sweep 1 (USDC) | sweep 2 (USDC) | sweep 3 (USDC) | avg rate (USDC/USDT) | slippage vs $100 (bips, avg) | price diff vs Binance ask (bips) |
 |---:|---:|---:|---:|---:|---:|---:|
 | 100        | 99.886839       | 99.885123       | 99.886829       | 0.99886264 | 0.00 (bench) | 1.39 |
 | 10,000     | 9,988.604843    | 9,988.569027    | 9,988.567318    | 0.99885804 | 0.05 | 1.43 |
@@ -165,7 +165,7 @@ Test window: 2026-05-30T13:21:52Z – 13:22:52Z · Binance ask: 1.00100 (1/ask =
 
 Test window: 2026-05-30T13:21:37Z – 13:22:37Z · Binance ask: 1.00100 (1/ask = 0.99900100)
 
-| amountIn (USDT) | sweep 1 (USDC) | sweep 2 (USDC) | sweep 3 (USDC) | avg rate (USDC/USDT) | size-spread vs $100 (bips, avg) | gap vs Binance ask (bips) |
+| amountIn (USDT) | sweep 1 (USDC) | sweep 2 (USDC) | sweep 3 (USDC) | avg rate (USDC/USDT) | slippage vs $100 (bips, avg) | price diff vs Binance ask (bips) |
 |---:|---:|---:|---:|---:|---:|---:|
 | 100        | 99.880139       | 99.880139       | 99.880020       | 0.99880099 | 0.00 (bench) | 2.00 |
 | 10,000     | 9,988.002000    | 9,988.002000    | 9,988.002000    | 0.99880020 | 0.01 | 2.01 |
@@ -187,7 +187,7 @@ Formula: `((binance_close − lifi_rate) / binance_close) × 10_000`. Positive =
 
 #### Cross-chain comparison (USDT → USDC, vs Binance ask)
 
-| chain     | test window (UTC) | Binance close | Li.fi $100 rate | gap @ $100 (bips) | Li.fi $1M rate | gap @ $1M (bips) |
+| chain     | test window (UTC) | Binance close | Li.fi $100 rate | price diff @ $100 (bips) | Li.fi $1M rate | price diff @ $1M (bips) |
 |---|---|---:|---:|---:|---:|---:|
 | Ethereum  | 2026-05-30T13:21:45–13:22:45 | 0.99900100 | 1.00238449 | **−33.87** (anomalous $100 route) | 0.99880459 | **1.97** |
 | Avalanche | 2026-05-30T13:21:52–13:22:52 | 0.99900100 | 0.99886264 | 1.39 | 0.99873276 | **2.69** |
@@ -197,13 +197,70 @@ All three chains within ~2–3 bips of Binance at $1M. Ethereum's $100 quote lan
 
 ---
 
+## Round-trip spread (forward × reverse)
+
+Implicit bid-ask spread at each trade size, computed as the round-trip cost of swapping USDC → USDT → USDC on the same venue at the same amount:
+
+`spread_bips = (1 − forward_rate × reverse_rate) × 10_000`
+
+where `forward_rate` is USDT-per-USDC and `reverse_rate` is USDC-per-USDT. Positive bips = round-trip loss (you end up with less than 1 USDC). Negative bips = round-trip gain (anomalous; only seen on Ethereum's small-trade routes).
+
+### Li.fi round-trip spread (per amount, per chain)
+
+Forward rates from Direction A Section 1 (2026-05-28). Reverse rates from Direction B Section 1 (2026-05-30).
+
+| amountIn | Ethereum (bips) | Avalanche (bips) | Solana (bips) |
+|---:|---:|---:|---:|
+| 100        | **−33.55** (anomalous $100 routes) | 1.07 | 1.94 |
+| 10,000     | **−0.15** (Ethereum $10K favorable route) | 1.85 | 2.21 |
+| 50,000     | 1.99 | 2.40 | 2.33 |
+| 100,000    | 2.11 | 2.56 | 2.34 |
+| 200,000    | 2.18 | 2.76 | 2.46 |
+| 300,000    | 2.29 | 2.92 | 2.53 |
+| 400,000    | 2.34 | 3.05 | 2.61 |
+| 500,000    | 2.39 | 3.15 | 2.64 |
+| **1,000,000** | **2.53** | **3.64** | **3.07** |
+
+### Binance round-trip spread (USDCUSDT top-of-book)
+
+Binance's bid-ask spread doesn't change with trade size at top-of-book; it's a constant 1 pip (≈ 0.10 bips) across every test window.
+
+| window | bid | ask | spread (bips) |
+|---|---:|---:|---:|
+| 2026-05-28 (forward) | 1.00117 | 1.00118 | 0.10 |
+| 2026-05-29 (forward rerun) | 1.00095 | 1.00096 | 0.10 |
+| 2026-05-30 (reverse) | 1.00099 | 1.00100 | 0.10 |
+
+For very large trades the *effective* Binance spread would widen by walking the order book — not directly measurable from the public bookTicker. The 0.10 bips figure is the top-of-book ceiling for small/medium trades within the displayed depth (~$1–7M each side at our snapshots).
+
+### Side-by-side comparison
+
+| amountIn | Li.fi Ethereum (bips) | Li.fi Avalanche (bips) | Li.fi Solana (bips) | Binance top-of-book (bips) |
+|---:|---:|---:|---:|---:|
+| 100        | −33.55 | 1.07 | 1.94 | 0.10 |
+| 10,000     | −0.15  | 1.85 | 2.21 | 0.10 |
+| 50,000     | 1.99   | 2.40 | 2.33 | 0.10 |
+| 100,000    | 2.11   | 2.56 | 2.34 | 0.10 |
+| 200,000    | 2.18   | 2.76 | 2.46 | 0.10 |
+| 300,000    | 2.29   | 2.92 | 2.53 | 0.10 |
+| 400,000    | 2.34   | 3.05 | 2.61 | 0.10 |
+| 500,000    | 2.39   | 3.15 | 2.64 | 0.10 |
+| **1,000,000** | **2.53** | **3.64** | **3.07** | **0.10** |
+
+Li.fi's round-trip spread at $1M (Ethereum 2.53 / Avalanche 3.64 / Solana 3.07 bips) is **~25–35× wider** than Binance's top-of-book spread (~0.10 bips). This is the cost of using an AMM (per-swap fee + routing overhead) vs an order book.
+
+### Caveat
+
+Li.fi forward and reverse Section 1 data were sampled 2 days apart (forward 2026-05-28, reverse 2026-05-30). The Li.fi round-trip column mixes the actual venue spread with 2-day market drift, so the per-amount numbers are approximate. A strict same-minute round-trip would require running both directions in a single test window.
+
+---
 
 ## Caveats
 
 - Single test-window snapshot per direction; on-chain pool ratios and CEX prices drift intraday. Forward and reverse snapshots are from different days (2026-05-29 / 2026-05-30); the directional comparison is approximate.
 - The estimate doesn't disclose which DEX or aggregator route Li.fi selected.
-- $1M is the top of the test range. To find where each chain's spread breaks, push to $5M+.
+- $1M is the top of the test range. To find where each chain's slippage breaks, push to $5M+.
 - Ethereum `$100` quotes hit an anomalous "small-trade route" in multiple runs (rates well above par); flagged in per-chain sections. Treat `$100` quotes on Ethereum with caution.
 - The Binance main API (`api.binance.com`) is geo-restricted from this location. Switched to `data-api.binance.vision` CDN for the latest run; same market data, no restriction.
 - Per-sweep raw API output is in script logs (`tasks/<run-id>.output`); omitted here.
-- Future improvements: more sweeps to tighten benchmark variance; spread vs a robust statistic (median of stable region) instead of a single $100 benchmark; same-minute forward and reverse runs for a true single-snapshot directional comparison.
+- Future improvements: more sweeps to tighten benchmark variance; slippage vs a robust statistic (median of stable region) instead of a single $100 benchmark; same-minute forward and reverse runs for a true single-snapshot directional comparison.

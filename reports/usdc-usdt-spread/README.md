@@ -1,6 +1,6 @@
 # Li.fi Liquidity Competitiveness — USDC ↔ USDT
 
-Measures how competitive Li.fi's USDC ↔ USDT swap offering is on Ethereum, Avalanche, and Solana, in both directions (USDC → USDT and USDT → USDC). Probes trade sizes from `$100` up to `$1M`, compares Li.fi rates against a same-window Binance benchmark, and reports both internal size-induced slippage and CEX-vs-DEX spread in basis points.
+Measures how competitive Li.fi's USDC ↔ USDT swap offering is on Ethereum, Avalanche, and Solana, in both directions (USDC → USDT and USDT → USDC). Probes trade sizes from `$100` up to `$1M`, compares Li.fi rates against a same-window Binance benchmark, and reports both internal Li.fi slippage and the price difference vs Binance in basis points.
 
 Motivation: App Kit is planning to support larger USDC ↔ USDT swap volume based on internal demand. This report establishes the baseline competitiveness before scaling.
 
@@ -32,7 +32,7 @@ Motivation: App Kit is planning to support larger USDC ↔ USDT swap volume base
 
 Li.fi tracks Binance to within ~2–3 bips at $1M on all three chains, in both directions:
 
-| chain | USDC → USDT $1M gap vs Binance bid (bips) | USDT → USDC $1M gap vs Binance ask (bips) |
+| chain | USDC → USDT $1M price diff vs Binance bid (bips) | USDT → USDC $1M price diff vs Binance ask (bips) |
 |---|---:|---:|
 | Ethereum  | 2.04 | 1.97 |
 | Avalanche | 2.70 | 2.69 |
@@ -42,6 +42,8 @@ The ~2-bip gap is consistent with the AMM fee on the underlying pool (Curve / Un
 
 Per-chain ordering is consistent across directions: **Ethereum tightest < Solana < Avalanche** at $1M.
 
-Internal Li.fi slippage (size-induced, $100 → $1M) is sub-1-bip on Avalanche and Solana in both directions; Ethereum has occasional anomalous `$100` quotes (small-trade routes paying well above par) but normal-route rates from $10K up.
+Internal Li.fi slippage ($100 → $1M) is sub-1-bip on Avalanche and Solana in both directions; Ethereum has occasional anomalous `$100` quotes (small-trade routes paying well above par) but normal-route rates from $10K up.
+
+The report also includes a round-trip spread section combining both directions (`spread = 1 − forward × reverse`) — Li.fi's implicit bid-ask at $1M lands ~2.5–3.6 bips depending on chain, vs Binance's ~0.10-bip top-of-book spread.
 
 Snapshot dates: forward 2026-05-28 / 2026-05-29 · reverse 2026-05-30. Both Binance and on-chain rates drift intraday, so absolute numbers are point-in-time; the structural ordering and ~2-bip magnitude is the stable headline.
