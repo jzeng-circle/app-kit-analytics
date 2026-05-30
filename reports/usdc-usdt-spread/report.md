@@ -4,11 +4,10 @@
 
 Planning to support larger USDC ↔ USDT swap volume in App Kit. This report quantifies how competitive Li.fi's stablecoin liquidity and swap offering is, across three chains (Ethereum, Avalanche, Solana) and both directions (USDC → USDT and USDT → USDC).
 
-The report covers each direction in sequence, with two sections per direction:
+The report covers each direction in sequence, with two sections per direction, plus a cross-direction third section:
 - **Section 1** — Internal Li.fi slippage (how Li.fi price changes with trade amount, no external benchmark).
 - **Section 2** — Binance price comparison (Li.fi rate vs Binance rate in the same 1-minute window; reported as a "price difference" in bips).
-
-A final section compares the two directions side by side.
+- **Section 3** — Round-trip spread (forward × reverse) on Ethereum, sampled in the same minute. Compares Li.fi's implicit bid-ask spread per trade size against Binance's top-of-book spread.
 
 ---
 
