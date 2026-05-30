@@ -227,29 +227,15 @@ Ethereum only, with both forward and reverse runs in the same minute (no cross-d
 
 ### Binance round-trip spread (same window, USDCUSDT top-of-book)
 
-| bid | ask | bid × (1/ask) | round-trip spread (bips) |
-|---:|---:|---:|---:|
-| 1.00099 | 1.00100 | 0.99999001 | **0.10** |
+| bid | bidQty (USDC) | ask | askQty (USDC) | bid × (1/ask) | round-trip spread (bips) |
+|---:|---:|---:|---:|---:|---:|
+| 1.00099 | 2,994,893 | 1.00100 | 4,483,607 | 0.99999001 | **0.10** |
 
-Binance bid-ask is constant at top-of-book regardless of trade size (within displayed depth of ~$3–4M each side at this snapshot). For larger trades the effective Binance spread would widen by walking the book — not directly measurable from the public bookTicker.
+**Caveat — the Binance quote is *not* per-amount.** Unlike Li.fi's `estimateSwap`, which takes a trade `amountIn` and returns a size-specific quote, the Binance `bookTicker` endpoint returns only the **top-of-book** bid/ask plus the quantities resting at those exact prices. The bid/ask is constant for any trade size **up to those quantities** (~$3M and ~$4.5M USDC at this snapshot); for trades larger than the displayed depth, the effective execution price would worsen by walking the order book — not measurable from `bookTicker` alone. For trades within the test range ($100 → $1M), all sit comfortably inside top-of-book depth, so 0.10 bips is the actual round-trip cost at any of our test sizes. For larger trades, a per-amount Binance comparison would require the `/api/v3/depth` endpoint to walk the book.
 
-### Side-by-side
+Li.fi Ethereum's round-trip spread at $1M is **~43× wider** than Binance's top-of-book bid-ask (4.33 vs 0.10 bips). This is the cost of using an on-chain AMM (per-swap fee + routing overhead) vs Binance's order book within top-of-book depth.
 
-| amountIn | Li.fi Ethereum (bips) | Binance top-of-book (bips) |
-|---:|---:|---:|
-| 100        | −28.08 (anomalous) | 0.10 |
-| 10,000     | 2.09  | 0.10 |
-| 50,000     | 3.82  | 0.10 |
-| 100,000    | 3.86  | 0.10 |
-| 200,000    | 4.03  | 0.10 |
-| 300,000    | 4.19  | 0.10 |
-| 400,000    | 4.21  | 0.10 |
-| 500,000    | 4.22  | 0.10 |
-| **1,000,000** | **4.33** | **0.10** |
-
-Li.fi Ethereum's round-trip spread at $1M is **~43× wider** than Binance's top-of-book bid-ask. This is the cost of using an on-chain AMM (per-swap fee + routing overhead) for a USDC ↔ USDT round-trip vs Binance's order book.
-
-The round-trip spread grows monotonically with size from ~2 bips at $10K to ~4.3 bips at $1M; the jump from $10K (2.09) to $50K (3.82) is the biggest step (size impact begins to matter past $10K). Above $200K the spread stabilizes near 4.0–4.3 bips.
+The Li.fi round-trip spread grows monotonically with size from ~2 bips at $10K to ~4.3 bips at $1M; the jump from $10K (2.09) to $50K (3.82) is the biggest step (size impact begins to matter past $10K). Above $200K the spread stabilizes near 4.0–4.3 bips.
 
 ---
 
