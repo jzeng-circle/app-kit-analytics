@@ -8,7 +8,7 @@ Motivation: App Kit is planning to support larger USDC ↔ USDT swap volume base
 
 | File | Description |
 |---|---|
-| [`report.md`](report.md) | Main deliverable — both directions in sequence, with per-chain tables, internal Li.fi slippage (Section 1) and Binance price comparison (Section 2) per direction, plus a cross-direction summary. |
+| [`report.md`](report.md) | Main deliverable — single combined report covering both directions. Per-direction sections include internal Li.fi slippage (Section 1) and Binance price comparison (Section 2); Section 3 (top-level) reports the same-window Ethereum round-trip spread vs Binance top-of-book. |
 
 ## Folder contents
 
