@@ -21,12 +21,11 @@ Three questions drive the analysis. Each has a precise definition and a reason i
 - *Definition*: Round-trip cost of swapping USDC → USDT → USDC on the same venue at the same size, in the same minute. Computed by multiplying forward and reverse rates: `spread_bips = (1 − forward_rate × reverse_rate) × 10_000`. Positive = round-trip loss; negative = anomalous routing premium.
 - *Why it matters*: The spread is the most direct measure of a venue's execution cost at a given size — it bundles AMM fees, routing overhead, and any market impact into one number. Compared against Binance's top-of-book bid-ask, it shows the structural cost of on-chain stablecoin execution.
 
-The report is organized to answer these questions in order:
-- **Section 1** addresses question 1 (slippage). Per-chain tables show how Li.fi's per-unit rate changes from `$100` to `$1M`, computed against each sweep's own `$100` quote and averaged over 3 sweeps.
-- **Section 2** addresses question 2 (price difference vs CEX). Per-chain tables compare Li.fi rates to Binance USDCUSDT kline close in the same 1-minute window.
-- **Section 3** addresses question 3 (spread). A same-window Ethereum forward + reverse run derives Li.fi's implicit bid-ask spread at each trade size, compared against Binance's same-window top-of-book bid-ask.
+The report is organized to answer these questions in order. Sections 1 and 2 are nested per direction (forward USDC → USDT and reverse USDT → USDC); Section 3 sits at the top level since it requires both directions in the same minute.
 
-Each direction (forward and reverse) is presented in sequence, with Sections 1 and 2 nested inside each direction; Section 3 sits at the top level since it requires both directions.
+- **Section 1 (per direction)** — addresses question 1 (slippage). Per-chain tables for Ethereum, Avalanche, and Solana show how the per-unit rate changes from `$100` → `$1M`, averaged over 3 interleaved sweeps with each sweep's own `$100` quote as the in-sweep benchmark. The forward direction also includes a cross-chain slippage summary.
+- **Section 2 (per direction)** — addresses question 2 (price difference vs CEX). A cross-chain table per direction compares each chain's per-amount Li.fi rate to Binance USDCUSDT at the kline close of the same 1-minute test window. Forward direction uses Binance **bid** (selling USDC for USDT); reverse uses **1/ask** (inverted to USDC-per-USDT so the value is directly comparable to Li.fi's rate).
+- **Section 3 (Ethereum only, top-level)** — addresses question 3 (spread). A same-minute Ethereum forward + reverse run (~4 seconds apart) derives the round-trip cost at each trade size, compared against Binance's same-window top-of-book bid-ask. Single chain so forward and reverse can run back-to-back inside one minute; expanding to other chains would need parallelizing the runs.
 
 ---
 
