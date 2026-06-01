@@ -9,17 +9,17 @@ Three questions drive the analysis:
 **1. Slippage — how much does Li.fi's quote degrade as trade size grows?**
 
 - *Definition*: bps difference between Li.fi's per-unit rate at `$100` and at a larger amount `A`, same sweep: `slippage_bips = ((rate_$100 − rate_A) / rate_$100) × 10_000`.
-- *Why it matters*: The venue's "cost of size." Low slippage = $1M trades at nearly the same per-unit price as $100; high slippage forces splitting orders to scale.
+- *Why it matters*: The venue's "cost of size." Low slippage = $1M trades at nearly the same per-unit price as $100; high slippage forces splitting orders to scale. Determines whether the on-chain path scales cleanly up to our planned volume, or whether we'd need order-splitting / off-chain routing past a certain size.
 
 **2. Price difference vs Binance (CEX) — how does Li.fi compare to the off-chain reference?**
 
 - *Definition*: bps gap between Li.fi's per-amount rate and Binance USDCUSDT in the same 1-minute window. Forward uses Binance **bid**; reverse uses **1/ask**. `price_diff_bips = ((binance_ref − lifi_rate) / binance_ref) × 10_000`.
-- *Why it matters*: Binance is the liquid reference for fair stablecoin price. The gap approximates the cost of choosing on-chain execution over off-chain.
+- *Why it matters*: Binance is the liquid reference for fair stablecoin price. The gap is the price premium a user pays for choosing on-chain execution over CEX. A small, stable gap (~2–3 bips) is acceptable as the AMM fee for on-chain settlement convenience; a persistent larger gap would push us toward routing improvements or a CEX-backed alternative.
 
 **3. Spread (round-trip) — what is Li.fi's implicit bid-ask at each size?**
 
 - *Definition*: Round-trip cost of USDC → USDT → USDC on the same venue at the same size, in the same minute: `spread_bips = (1 − forward_rate × reverse_rate) × 10_000`.
-- *Why it matters*: Bundles AMM fees, routing overhead, and market impact into one number — the venue's effective execution cost at a given size, comparable to a CEX's bid-ask.
+- *Why it matters*: Bundles AMM fees, routing overhead, and market impact into one number — the venue's effective execution cost at a given size. Most relevant for round-trip workflows (arb, treasury rebalancing, market-maker inventory) where the same dollar pays the cost twice. Compared against a CEX top-of-book bid-ask (~0.1 bips on USDCUSDT), it quantifies the structural cost of on-chain stablecoin execution.
 
 The report is organized to answer these in order. Sections 1 and 2 nest per direction (forward USDC → USDT, reverse USDT → USDC); Section 3 is top-level since it needs both directions in one minute.
 
