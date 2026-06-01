@@ -4,28 +4,28 @@
 
 Planning to support larger USDC ↔ USDT swap volume in App Kit. This report quantifies how competitive Li.fi's stablecoin liquidity and swap offering is, across three chains (Ethereum, Avalanche, Solana) and both directions (USDC → USDT and USDT → USDC).
 
-Three questions drive the analysis. Each has a precise definition and a reason it matters for the scaling decision.
+Three questions drive the analysis:
 
-**1. Slippage — how much does Li.fi's quote degrade as the trade gets bigger?**
+**1. Slippage — how much does Li.fi's quote degrade as trade size grows?**
 
-- *Definition*: bps change in per-unit execution price between a small reference trade (`$100`) and a larger trade on the same venue, in the same window. For a given amount `A`: `slippage_bips = ((rate_$100 − rate_A) / rate_$100) × 10_000`.
-- *Why it matters*: This is the venue's "cost of size." High slippage means scaling up requires splitting orders or accepting worse fills; low slippage means $1M trades nearly the same per-unit price as $100. Determines whether Li.fi's liquidity is deep enough for the volumes we plan to support.
+- *Definition*: bps difference between Li.fi's per-unit rate at `$100` and at a larger amount `A`, same sweep: `slippage_bips = ((rate_$100 − rate_A) / rate_$100) × 10_000`.
+- *Why it matters*: The venue's "cost of size." Low slippage = $1M trades at nearly the same per-unit price as $100; high slippage forces splitting orders to scale.
 
-**2. Price difference vs Binance (CEX) — how competitive is Li.fi vs the off-chain reference?**
+**2. Price difference vs Binance (CEX) — how does Li.fi compare to the off-chain reference?**
 
-- *Definition*: bps gap between Li.fi's per-amount rate and Binance's USDCUSDT order-book price in the same 1-minute window. Compared against Binance **bid** for forward (USDC → USDT) trades and Binance **1/ask** for reverse (USDT → USDC) trades. `price_diff_bips = ((binance_ref − lifi_rate) / binance_ref) × 10_000`.
-- *Why it matters*: Binance is a liquid, well-arbed reference for "fair stablecoin price." The gap approximates the cost of choosing on-chain execution vs off-chain. A small gap (~2–3 bips) means Li.fi is competitively priced against the CEX best; a large gap would signal market dislocation or route inefficiency.
+- *Definition*: bps gap between Li.fi's per-amount rate and Binance USDCUSDT in the same 1-minute window. Forward uses Binance **bid**; reverse uses **1/ask**. `price_diff_bips = ((binance_ref − lifi_rate) / binance_ref) × 10_000`.
+- *Why it matters*: Binance is the liquid reference for fair stablecoin price. The gap approximates the cost of choosing on-chain execution over off-chain.
 
 **3. Spread (round-trip) — what is Li.fi's implicit bid-ask at each size?**
 
-- *Definition*: Round-trip cost of swapping USDC → USDT → USDC on the same venue at the same size, in the same minute. Computed by multiplying forward and reverse rates: `spread_bips = (1 − forward_rate × reverse_rate) × 10_000`. Positive = round-trip loss; negative = anomalous routing premium.
-- *Why it matters*: The spread is the most direct measure of a venue's execution cost at a given size — it bundles AMM fees, routing overhead, and any market impact into one number. Compared against Binance's top-of-book bid-ask, it shows the structural cost of on-chain stablecoin execution.
+- *Definition*: Round-trip cost of USDC → USDT → USDC on the same venue at the same size, in the same minute: `spread_bips = (1 − forward_rate × reverse_rate) × 10_000`.
+- *Why it matters*: Bundles AMM fees, routing overhead, and market impact into one number — the venue's effective execution cost at a given size, comparable to a CEX's bid-ask.
 
-The report is organized to answer these questions in order. Sections 1 and 2 are nested per direction (forward USDC → USDT and reverse USDT → USDC); Section 3 sits at the top level since it requires both directions in the same minute.
+The report is organized to answer these in order. Sections 1 and 2 nest per direction (forward USDC → USDT, reverse USDT → USDC); Section 3 is top-level since it needs both directions in one minute.
 
-- **Section 1 (per direction)** — addresses question 1 (slippage). Per-chain tables for Ethereum, Avalanche, and Solana show how the per-unit rate changes from `$100` → `$1M`, averaged over 3 interleaved sweeps with each sweep's own `$100` quote as the in-sweep benchmark. The forward direction also includes a cross-chain slippage summary.
-- **Section 2 (per direction)** — addresses question 2 (price difference vs CEX). A cross-chain table per direction compares each chain's per-amount Li.fi rate to Binance USDCUSDT at the kline close of the same 1-minute test window. Forward direction uses Binance **bid** (selling USDC for USDT); reverse uses **1/ask** (inverted to USDC-per-USDT so the value is directly comparable to Li.fi's rate).
-- **Section 3 (Ethereum only, top-level)** — addresses question 3 (spread). A same-minute Ethereum forward + reverse run (~4 seconds apart) derives the round-trip cost at each trade size, compared against Binance's same-window top-of-book bid-ask. Single chain so forward and reverse can run back-to-back inside one minute; expanding to other chains would need parallelizing the runs.
+- **Section 1 (per direction)** — answers question 1. Per-chain tables for Ethereum, Avalanche, Solana from `$100` → `$1M`, averaged over 3 interleaved sweeps vs each sweep's own `$100`. Forward direction also includes a cross-chain slippage summary.
+- **Section 2 (per direction)** — answers question 2. Cross-chain table comparing Li.fi per-amount rates to Binance USDCUSDT kline close in the same 1-minute window. Forward uses Binance **bid**; reverse uses **1/ask**.
+- **Section 3 (Ethereum only, top-level)** — answers question 3. Ethereum forward + reverse run back-to-back (~4 sec apart) to derive round-trip cost per trade size, vs Binance same-window top-of-book.
 
 ---
 
